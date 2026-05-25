@@ -265,24 +265,6 @@
         .btn-submit:active { transform:translateY(1px); }
         .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        /* LOCKED OVERLAY on form */
-        .form-locked-overlay {
-            display: none;
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(255,255,255,0.7);
-            border-radius: 32px;
-            z-index: 10;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 12px;
-            backdrop-filter: blur(3px);
-        }
-        .form-locked-overlay.show { display: flex; }
-        .lock-icon { font-size: 40px; color: #C6A43F; }
-        .lock-text { font-size: 13px; font-weight: 700; color: #0F4C3A; }
-
         @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
         .ripple-effect { position:absolute; border-radius:50%; background:rgba(255,255,255,0.4); transform:scale(0); animation:rippleAnim 0.6s linear; pointer-events:none; }
         @keyframes shakeBtn { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
@@ -717,15 +699,16 @@
 <div class="toast" id="globalToast"></div>
 
 <script>
-    const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyHHP9pyto1Is-a5nANmTuGrRSZNXmVko9A2DIZ7XsmGsDX2LzpJgmYrEr_vaQwy_-cw/exec';
+    // GANTI DENGAN URL DEPLOY APPS SCRIPT ANDA
+    const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvHrUgj5OSJpQnf8zvi143XdEGUHWjLwNfkjEm6lhSorfh620bsV4bg0vYPEkmTDv_qQ/exec';
 
     let selectedFile = null;
     let selectedModalFile = null;
     let currentPaymentId = null;
-    let currentPaymentNominal = null;   // total asli
-    let currentPaymentSisa = null;      // sisa setelah dikurangi pembayaran sebelumnya
+    let currentPaymentNominal = null;
+    let currentPaymentSisa = null;
     let currentPaymentChatId = null;
-    let currentPaymentPaid = 0;         // sudah dibayar
+    let currentPaymentPaid = 0;
     let isPartialPayment = false;
     let otpVerified = false;
     let generatedOTP = null;
@@ -733,7 +716,7 @@
     let otpExpiry = null;
     let otpChatIdVerified = null;
 
-    /* ─── TOAST ─── */
+    /* TOAST */
     function showToast(msg, icon='fa-check-circle', duration=2500) {
         const t = document.getElementById('globalToast');
         t.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
@@ -741,7 +724,7 @@
         setTimeout(() => t.classList.remove('show'), duration);
     }
 
-    /* ─── RIPPLE ─── */
+    /* RIPPLE */
     function addRipple(btn, e) {
         const rect = btn.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -754,7 +737,6 @@
         setTimeout(() => r.remove(), 700);
     }
 
-    /* ─── BTN LOADING ─── */
     function setBtnLoading(btn, loading, originalHTML) {
         if (loading) {
             btn.dataset.original = btn.innerHTML;
@@ -768,7 +750,7 @@
         }
     }
 
-    /* ─── OTP SYSTEM ─── */
+    /* OTP SYSTEM */
     window.sendOTP = async function() {
         const chatId = document.getElementById('otpChatId').value.trim();
         if (!chatId) {
@@ -781,12 +763,10 @@
         setBtnLoading(btn, true);
         setOtpStatus('info', '<i class="fas fa-spinner fa-spin"></i> Mengirim OTP ke Telegram...');
 
-        // Generate 6-digit OTP
         generatedOTP = String(Math.floor(100000 + Math.random() * 900000));
-        otpExpiry = Date.now() + 3 * 60 * 1000; // 3 menit
+        otpExpiry = Date.now() + 3 * 60 * 1000;
 
         try {
-            // Kirim OTP via AppScript ke Telegram
             const payload = {
                 action: 'sendOTP',
                 chat_id: chatId,
@@ -855,7 +835,6 @@
             return;
         }
 
-        // SUCCESS
         otpVerified = true;
         otpChatIdVerified = chatId;
         clearInterval(otpTimerInterval);
@@ -868,7 +847,6 @@
         setOtpStatus('verified', '');
         document.getElementById('verifiedBadge').classList.add('show');
 
-        // Unlock form
         document.getElementById('formChatId').value = chatId;
         const submitBtn = document.getElementById('formSubmitBtn');
         submitBtn.disabled = false;
@@ -883,9 +861,9 @@
         el.innerHTML = html;
     }
 
-    /* ─── COPY REKENING ─── */
+    /* COPY REKENING */
     window.copyRekening = function() {
-        const nomor = '11300148624311';
+        const nomor = '1130014862431';
         navigator.clipboard.writeText(nomor).then(() => {
             const btn = document.getElementById('copyRekeningBtn');
             const orig = btn.innerHTML;
@@ -904,7 +882,7 @@
         });
     };
 
-    /* ─── PARTIAL PAYMENT TOGGLE ─── */
+    /* PARTIAL PAYMENT TOGGLE */
     window.togglePartial = function() {
         isPartialPayment = !isPartialPayment;
         const toggle = document.getElementById('partialToggle');
@@ -918,7 +896,7 @@
         }
     };
 
-    /* ─── INIT ─── */
+    /* INIT */
     document.addEventListener('DOMContentLoaded', function() {
         setupTabs();
         loadPaket();
@@ -929,7 +907,7 @@
         setupRupiahFormatter();
         setupRippleAll();
         setupPartialFormatter();
-        // Enter key on OTP input
+
         document.getElementById('otpCodeInput').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') verifyOTP();
         });
@@ -1022,8 +1000,7 @@
                         keterangan: form.keterangan.value.trim(),
                         nominal: nominal,
                         chat_id: otpChatIdVerified,
-                        file: fileData,
-                        otp_verified: true
+                        file: fileData
                     })
                 });
                 setBtnLoading(submitBtn, false, '<i class="fas fa-check-circle"></i> Terkirim!');
@@ -1127,10 +1104,10 @@
     }
 
     function formatRupiah(num) {
-        return new Intl.NumberFormat('id-ID', { style:'currency', currency:'IDR' }).format(num);
+        return new Intl.NumberFormat('id-ID', { style:'currency', currency:'IDR', minimumFractionDigits:0 }).format(num);
     }
 
-    /* ─── CEK TOTAL HUTANG ─── */
+    /* CEK TOTAL HUTANG */
     async function loadTotalHutang(btn) {
         const chatId = document.getElementById('hutangChatId').value.trim();
         const result = document.getElementById('hutangResult');
@@ -1173,7 +1150,7 @@
         }
     }
 
-    /* ─── HISTORY ─── */
+    /* HISTORY */
     async function loadHistory(btn) {
         const chatId = document.getElementById('historyChatId').value.trim();
         const result = document.getElementById('historyResult');
@@ -1197,6 +1174,7 @@
                 const s = String(item.status).toLowerCase();
                 if (s==='approved'||s==='disetujui') { statusClass='approved'; statusText='Disetujui'; }
                 else if (s==='lunas') { statusClass='lunas'; statusText='Lunas'; }
+                else if (s==='cicilan') { statusClass='approved'; statusText='Cicilan'; }
                 const paid = item.paid || 0;
                 const sisa = item.nominal - paid;
                 const pct = item.nominal > 0 ? Math.round((paid/item.nominal)*100) : 0;
@@ -1220,7 +1198,7 @@
         }
     }
 
-    /* ─── CEK HUTANG UNTUK BAYAR ─── */
+    /* CEK HUTANG UNTUK BAYAR */
     async function loadHutangForPayment(btn) {
         const chatId = document.getElementById('bayarChatId').value.trim();
         const result = document.getElementById('bayarResult');
@@ -1239,7 +1217,6 @@
             if (btn) setBtnLoading(btn, false);
             if (data.count === 0) { result.innerHTML = '<div class="empty-data"><i class="fas fa-credit-card"></i><p>Tidak ada hutang</p></div>'; return; }
 
-            // Hitung total sisa (bukan total nominal asli)
             let totalSisa = 0;
             data.hutangList.forEach(item => {
                 const paid = item.paid || 0;
@@ -1268,7 +1245,6 @@
                     <div class="bayar-meta"><span><i class="far fa-calendar-alt"></i> ${new Date(item.tanggal).toLocaleDateString('id-ID')}</span><span><i class="fas fa-tag"></i> ${item.paket||'-'}</span></div>
                     <div class="bayar-nominal">${formatRupiah(item.nominal)}</div>`;
 
-                // Progress bar jika ada pembayaran
                 if (paid > 0) {
                     html += `<div class="payment-progress" style="margin-top:10px;">
                         <div class="payment-progress-label"><span>Progress Bayar</span><span>${pct}%</span></div>
@@ -1304,7 +1280,7 @@
         }
     }
 
-    /* ─── OPEN UPLOAD MODAL ─── */
+    /* OPEN UPLOAD MODAL */
     window.openUploadModal = function(id, nominal, chatId, paid) {
         currentPaymentId = id;
         currentPaymentNominal = nominal;
@@ -1314,11 +1290,8 @@
         isPartialPayment = false;
 
         document.getElementById('modalId').value = id;
-
-        // Update sisa tampilan
         document.getElementById('sisaNominalDisplay').textContent = formatRupiah(currentPaymentSisa);
 
-        // Progress bar
         if (currentPaymentPaid > 0) {
             const pct = Math.round((currentPaymentPaid / nominal) * 100);
             document.getElementById('paymentProgress').style.display = 'block';
@@ -1333,7 +1306,6 @@
             document.getElementById('sisaNominalDetail').textContent = `Total tagihan: ${formatRupiah(nominal)}`;
         }
 
-        // Reset partial toggle
         document.getElementById('partialToggle').classList.remove('on');
         document.getElementById('partialAmountSection').classList.remove('show');
         document.getElementById('partialNominalInput').value = '';
@@ -1352,12 +1324,11 @@
         document.getElementById('modalMessage').innerHTML = '';
     };
 
-    /* ─── SUBMIT PEMBAYARAN ─── */
+    /* SUBMIT PEMBAYARAN */
     window.submitPembayaran = async function() {
         const msgDiv = document.getElementById('modalMessage');
         const submitBtn = document.getElementById('submitBayarBtn');
 
-        // Tentukan nominal bayar
         let nominalBayar = currentPaymentSisa;
         if (isPartialPayment) {
             const rawPartial = document.getElementById('partialNominalInput').value.replace(/\./g,'');
@@ -1398,9 +1369,6 @@
 
         try {
             const fileData = await fileToBase64(selectedModalFile);
-            const newPaid = currentPaymentPaid + nominalBayar;
-            const newSisa = currentPaymentNominal - newPaid;
-            const isLunas = newSisa <= 0;
 
             await fetch(APPSCRIPT_URL, {
                 method: 'POST',
@@ -1409,11 +1377,7 @@
                 body: JSON.stringify({
                     action: 'submitPembayaran',
                     id: currentPaymentId,
-                    nominal_asli: currentPaymentNominal,
                     nominal_bayar: nominalBayar,
-                    nominal_sudah_bayar: newPaid,
-                    nominal_sisa: Math.max(0, newSisa),
-                    is_lunas: isLunas,
                     is_partial: isPartialPayment,
                     chat_id: currentPaymentChatId,
                     bukti: fileData
@@ -1422,6 +1386,8 @@
 
             setBtnLoading(submitBtn, false, '<i class="fas fa-check-circle"></i> Terkirim!');
 
+            const newSisa = currentPaymentSisa - nominalBayar;
+            const isLunas = newSisa <= 0;
             const sisaInfo = isLunas
                 ? `<strong style="color:#059669">LUNAS! 🎉</strong>`
                 : `Sisa tagihan: <strong>${formatRupiah(Math.max(0, newSisa))}</strong>`;
@@ -1443,7 +1409,7 @@
         }
     };
 
-    /* ─── INSTRUKSI TOGGLE ─── */
+    /* INSTRUKSI TOGGLE */
     window.toggleInstruksi = function() {
         const content = document.getElementById('instruksiContent');
         const icon = document.querySelector('.instruksi-header i');
@@ -1466,4 +1432,3 @@
 </script>
 </body>
 </html>
-
