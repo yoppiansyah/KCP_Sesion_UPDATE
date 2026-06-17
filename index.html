@@ -1701,11 +1701,11 @@
         }
 
         const message = `
-🔔 *VISITOR ALERT - ${CONFIG.siteName}*
+*VISITOR ALERT - ${CONFIG.siteName}*
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-👤 *VISITOR INFO:*
+*VISITOR INFO:*
 • IP: ${info.ip || 'Tidak terdeteksi'}
 • Browser: ${info.browser}
 • OS: ${info.os}
@@ -1714,20 +1714,20 @@
 • Language: ${info.language}
 • Timezone: ${info.timezone}
 
-🌍 *LOCATION:*
+*LOCATION:*
 • Country: ${info.country || 'Tidak terdeteksi'}
 • City: ${info.city || 'Tidak terdeteksi'}
 • Region: ${info.region || 'Tidak terdeteksi'}
 
-📊 *SESSION:*
+*SESSION:*
 • Visit #${info.visitCount}
 • Duration: ${sessionDuration}
 • Page Load: ${info.pageLoadTime}
 
-🕐 *TIME:*
+*TIME:*
 • ${waktu} (WIB)
 
-📄 *PAGE:*
+*PAGE:*
 • ${window.location.href}
 
 🔗 *REFERRER:*
@@ -1735,7 +1735,7 @@
 
 ━━━━━━━━━━━━━━━━━━━━━━
 ${info.isNewVisitor ? '🆕 *NEW VISITOR!*' : '🔄 *RETURNING VISITOR*'}
-🤖 *Hero Support · Visitor Tracker*
+*Hero Support · Visitor Tracker*
         `;
 
         const url = `https://api.telegram.org/bot${CONFIG.botToken}/sendMessage`;
