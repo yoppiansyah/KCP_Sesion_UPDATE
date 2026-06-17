@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#0F4C3A">
+    <meta name="site-name" content="KCP NEXUS - Financial Platform">
+    <meta name="site-type" content="financial-nexus">
+    
+    <!-- ===== ANTI-CACHE & REFRESH PROTECTION ===== -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Clear-Site-Data" content="cache, cookies, storage, executionContexts">
+    
+    <title>KCP NEXUS | Premium Financial Nexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== ANTI-SELECTION ===== */
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* ===== INJECTOR PROTECTION ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99999;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* CSS VARIABLES untuk Light & Dark Mode */
+        :root {
+            --bg-gradient-start: #F5F2EB;
+            --bg-gradient-end: #EDE8E0;
+            --card-bg: #FFFFFF;
+            --text-primary: #2C2C2C;
+            --text-secondary: #7F6E5D;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-bg: #FEFDFB;
+            --otp-bg-start: #F0F9F6;
+            --otp-bg-end: #E8F5F0;
+            --instruksi-bg: #F9F7F3;
+            --file-upload-bg: #f8fafc;
+            --shadow-color: rgba(0,0,0,0.05);
+            --shadow-heavy: rgba(0,0,0,0.08);
+            --badge-bg: #f1f5f9;
+            --payment-progress-bg: #F0F9F6;
+            --partial-toggle-bg: #F9F7F3;
+            --footer-color: #C4B6A8;
+            --toast-bg: #0F4C3A;
+            --tagihan-card-bg: #FFFFFF;
+        }
+
+        /* Dark Mode Variables */
+        body.dark {
+            --bg-gradient-start: #1a1a2e;
+            --bg-gradient-end: #16213e;
+            --card-bg: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --input-bg: #0f172a;
+            --otp-bg-start: #0f2e28;
+            --otp-bg-end: #0a2620;
+            --instruksi-bg: #0f172a;
+            --file-upload-bg: #0f172a;
+            --shadow-color: rgba(0,0,0,0.3);
+            --shadow-heavy: rgba(0,0,0,0.4);
+            --badge-bg: #334155;
+            --payment-progress-bg: #0f2e28;
+            --partial-toggle-bg: #0f172a;
+            --footer-color: #64748b;
+            --toast-bg: #1e293b;
+            --tagihan-card-bg: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .container { max-width: 550px; margin: 0 auto; background: transparent; }
+
+        /* DARK MODE TOGGLE BUTTON */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px var(--shadow-heavy);
+            z-index: 999;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            background: #C6A43F;
+            color: white;
+            border-color: #C6A43F;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding: 20px 16px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid rgba(198,164,63,0.2);
+            transition: all 0.3s ease;
+        }
+        .header h1 { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 6px; }
+        .header .bpab { font-size: 28px; font-weight: 800; letter-spacing: 3px; color: #0F4C3A; margin: 6px 0; }
+        body.dark .header .bpab { color: #C6A43F; }
+        .header .garis { width: 80px; height: 3px; background: linear-gradient(90deg,#C6A43F,#E8D28C,#C6A43F); margin: 12px auto; border-radius: 3px; }
+        .header .motto { font-size: 11px; color: #C6A43F; letter-spacing: 2px; font-weight: 500; text-transform: uppercase; }
+        .header .alamat { font-size: 10px; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
+
+        /* TABS */
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 8px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            padding: 6px;
+            border-radius: 60px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(198,164,63,0.25);
+            transition: all 0.3s ease;
+        }
+        body.dark .tabs {
+            background: rgba(30,41,59,0.7);
+        }
+        .tab-btn {
+            padding: 12px 4px;
+            background: transparent;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .tab-btn i { font-size: 14px; transition: transform 0.2s ease; }
+        .tab-btn.active { background: #0F4C3A; color: white; box-shadow: 0 4px 12px rgba(15,76,58,0.25); transform: scale(1.02); }
+        .tab-btn:hover:not(.active) { color: #0F4C3A; background: rgba(15,76,58,0.08); }
+        body.dark .tab-btn:hover:not(.active) { color: #C6A43F; background: rgba(198,164,63,0.15); }
+
+        /* PANEL */
+        .panel { display: none; animation: fadeIn 0.4s ease; }
+        .panel.active { display: block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+        /* CARD */
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 24px;
+            box-shadow: 0 20px 40px -12px var(--shadow-color);
+            border: 1px solid rgba(198,164,63,0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* FORM */
+        .form-group { margin-bottom: 18px; }
+        .form-label { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 7px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-label span { color: #C6A43F; }
+        input:not([type="file"]), select, textarea {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #C6A43F; box-shadow: 0 0 0 3px rgba(198,164,63,0.12); }
+        textarea { resize: vertical; min-height: 85px; }
+        .nominal-wrapper { position: relative; }
+        .nominal-prefix { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; font-weight: 500; pointer-events: none; }
+        #nominalInput { padding-left: 45px; }
+
+        /* OTP SECTION */
+        .otp-section {
+            background: linear-gradient(135deg, var(--otp-bg-start) 0%, var(--otp-bg-end) 100%);
+            border: 1.5px solid rgba(15,76,58,0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .otp-section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(198,164,63,0.1);
+            border-radius: 50%;
+        }
+        .otp-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0F4C3A;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        body.dark .otp-title { color: #C6A43F; }
+        .otp-title i { color: #C6A43F; }
+        .otp-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 14px; }
+        .otp-input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .otp-input-row input {
+            flex: 1;
+            letter-spacing: 4px;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            border-color: rgba(15,76,58,0.25);
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+        .otp-input-row input:focus { border-color: #0F4C3A; box-shadow: 0 0 0 3px rgba(15,76,58,0.12); }
+        .btn-send-otp {
+            padding: 13px 16px;
+            background: #0F4C3A;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-send-otp:hover { background: #1A5E4A; transform: translateY(-1px); }
+        .btn-send-otp:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .otp-status { margin-top: 10px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .otp-status.verified { color: #059669; }
+        .otp-status.error { color: #dc2626; }
+        .otp-status.info { color: #0F4C3A; }
+        body.dark .otp-status.info { color: #C6A43F; }
+        .otp-countdown {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+        .otp-verify-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn-verify-otp {
+            flex: 1;
+            padding: 11px;
+            background: transparent;
+            border: 1.5px solid #C6A43F;
+            color: #C6A43F;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+        .btn-verify-otp:hover { background: #C6A43F; color: white; }
+        .verified-badge {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            background: #D1FAE5;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #059669;
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .verified-badge.show { display: flex; animation: messagePop 0.3s ease; }
+
+        /* INSTRUKSI CARD */
+        .instruksi-card { background: var(--instruksi-bg); border-radius: 20px; padding: 16px 18px; margin-bottom: 24px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .instruksi-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+        .instruksi-header span { font-weight: 700; font-size: 13px; color: #0F4C3A; }
+        body.dark .instruksi-header span { color: #C6A43F; }
+        .instruksi-header i { color: #C6A43F; font-size: 13px; transition: transform 0.3s ease; }
+        .instruksi-content { display: none; padding-top: 14px; margin-top: 10px; border-top: 1px solid var(--border-color); }
+        .instruksi-content.show { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+        .step-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+        .step-number { width: 24px; height: 24px; background: #0F4C3A; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+        .step-text { font-size: 12px; color: var(--text-secondary); flex: 1; }
+        .step-text strong { color: #0F4C3A; }
+        body.dark .step-text strong { color: #C6A43F; }
+        .btn-group { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+        .btn-bot, .btn-bot-outline {
+            padding: 9px 16px; border-radius: 40px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s ease; text-align: center; flex: 1;
+        }
+        .btn-bot { background: #0F4C3A; color: white; border: none; }
+        .btn-bot:hover { background: #1A5E4A; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(15,76,58,0.3); }
+        .btn-bot-outline { border: 1.5px solid #C6A43F; color: #C6A43F; background: transparent; }
+        .btn-bot-outline:hover { background: #C6A43F; color: white; transform: translateY(-2px); }
+
+        /* FILE UPLOAD */
+        .file-upload { border: 1.5px dashed var(--border-color); border-radius: 16px; padding: 16px; text-align: center; cursor: pointer; background: var(--file-upload-bg); transition: all 0.2s ease; }
+        .file-upload:hover { border-color: #C6A43F; background: var(--card-bg); transform: translateY(-1px); }
+        .file-upload p { font-size: 12px; color: var(--text-muted); }
+        .file-name { margin-top: 8px; color: #0F4C3A; font-size: 11px; font-weight: 600; word-break: break-all; }
+        body.dark .file-name { color: #C6A43F; }
+
+        /* BUTTONS */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg,#0F4C3A,#0D4232);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(15,76,58,0.25);
+        }
+        .btn-submit::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent); transition:left 0.5s ease; }
+        .btn-submit:hover::before { left:100%; }
+        .btn-submit:hover { background: linear-gradient(135deg,#1A5E4A,#0F4C3A); transform:translateY(-2px); box-shadow:0 8px 20px rgba(15,76,58,0.3); }
+        .btn-submit:active { transform:translateY(1px); }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
+        .ripple-effect { position:absolute; border-radius:50%; background:rgba(255,255,255,0.4); transform:scale(0); animation:rippleAnim 0.6s linear; pointer-events:none; }
+        @keyframes shakeBtn { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+        .btn-shake { animation: shakeBtn 0.4s ease; }
+
+        /* COPY */
+        .copy-btn { display:inline-flex; align-items:center; gap:6px; margin-top:10px; padding:7px 18px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:30px; color:white; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.25s ease; font-family:'Inter',sans-serif; backdrop-filter:blur(4px); }
+        .copy-btn:hover { background:rgba(255,255,255,0.25); border-color:rgba(255,255,255,0.5); transform:translateY(-2px); }
+        .copy-btn.copied { background:rgba(198,164,63,0.3); border-color:#C6A43F; color:#E8D28C; }
+
+        /* TOAST */
+        .toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--toast-bg); color:white; padding:12px 22px; border-radius:30px; font-size:13px; font-weight:600; box-shadow:0 8px 24px rgba(0,0,0,0.4); z-index:9999; transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.35s ease; opacity:0; white-space:nowrap; display:flex; align-items:center; gap:8px; }
+        .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+        .btn-track { width:100%; padding:12px 14px; background:transparent; border:1.5px solid #0F4C3A; color:#0F4C3A; border-radius:18px; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.3s ease; font-family:'Inter',sans-serif; display:flex; align-items:center; justify-content:center; gap:10px; position:relative; overflow:hidden; margin-top:4px; }
+        .btn-track:hover { background:#0F4C3A; color:white; transform:translateY(-2px); box-shadow:0 8px 20px rgba(15,76,58,0.2); }
+        .btn-track:active { transform:translateY(1px); }
+        body.dark .btn-track { border-color: #C6A43F; color: #C6A43F; }
+        body.dark .btn-track:hover { background: #C6A43F; color: #0F4C3A; }
+
+        /* REKENING */
+        .rekening-card { background:linear-gradient(135deg,#0F4C3A 0%,#0A3A2C 100%); border-radius:24px; padding:22px; margin-bottom:20px; color:white; text-align:center; transition:transform 0.3s ease,box-shadow 0.3s ease; box-shadow:0 10px 25px -5px rgba(15,76,58,0.3); border:1px solid rgba(255,255,255,0.1); }
+        .rekening-card:hover { transform:translateY(-3px); box-shadow:0 15px 30px -10px rgba(15,76,58,0.4); }
+        .rekening-title { font-size:13px; font-weight:600; margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:10px; letter-spacing:0.5px; opacity:0.8; }
+        .bank-name { font-size:11px; opacity:0.8; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+        .account-number { font-size:26px; font-weight:800; margin:12px 0 8px; letter-spacing:3px; font-family:monospace; }
+        .account-name { font-size:13px; opacity:0.9; font-weight:500; }
+        .rekening-note { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.15); font-size:11px; display:flex; align-items:center; justify-content:center; gap:8px; }
+
+        /* RESULTS */
+        #bayarResult, #hutangResult, #historyResult { margin-top: 20px; }
+
+        .total-hutang-card { background:linear-gradient(135deg,#0F4C3A 0%,#0A3A2C 100%); border-radius:20px; padding:14px 16px; margin-bottom:20px; text-align:center; transition:transform 0.3s ease; box-shadow:0 10px 25px -5px rgba(15,76,58,0.35); animation:amountPop 0.5s ease; }
+        @keyframes amountPop { 0%{transform:scale(0.95);opacity:0} 80%{transform:scale(1.02)} 100%{transform:scale(1);opacity:1} }
+        .total-hutang-card:hover { transform:translateY(-2px); }
+        .total-hutang-label { font-size:12px; text-transform:uppercase; letter-spacing:0.5px; color:rgba(255,255,255,0.95); margin-bottom:6px; }
+        .total-hutang-amount { font-size:32px; font-weight:800; color:#C6A43F; letter-spacing:-0.5px; margin-bottom:6px; }
+        .total-hutang-count { font-size:11px; color:rgba(255,255,255,0.85); }
+
+        .hutang-list, .history-list, .bayar-list { display:flex; flex-direction:column; gap:20px; }
+        .scroll-area { max-height:420px; overflow-y:auto; padding-right:4px; margin-top:16px; }
+        .scroll-area::-webkit-scrollbar { width:5px; }
+        .scroll-area::-webkit-scrollbar-track { background:var(--border-color); border-radius:10px; }
+        .scroll-area::-webkit-scrollbar-thumb { background:#C6A43F; border-radius:10px; }
+
+        .hutang-item, .history-item, .bayar-item { background: var(--tagihan-card-bg); border-radius:18px; padding:18px; border:1px solid var(--border-color); transition:all 0.2s ease; animation:itemFadeIn 0.3s ease; }
+        @keyframes itemFadeIn { from{opacity:0;transform:translateX(-5px)} to{opacity:1;transform:translateX(0)} }
+        .hutang-item:hover, .history-item:hover, .bayar-item:hover { border-color:#C6A43F; box-shadow:0 6px 16px rgba(198,164,63,0.1); transform:translateX(4px); }
+
+        .hutang-header, .history-header, .bayar-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px; }
+        .hutang-id, .history-id, .bayar-id { font-weight:800; font-size:12px; color:#0F4C3A; background:var(--badge-bg); padding:4px 12px; border-radius:30px; }
+        body.dark .hutang-id, body.dark .history-id, body.dark .bayar-id { color: #C6A43F; }
+        .hutang-status { padding:3px 12px; border-radius:30px; font-size:10px; font-weight:700; background:#D1FAE5; color:#0F4C3A; }
+        .history-status.pending, .bayar-status.waiting { background:#fef3c7; color:#d97706; }
+        .history-status.approved, .history-status.lunas, .bayar-status.lunas { background:#d1fae5; color:#059669; }
+        .history-status, .bayar-status { padding:3px 12px; border-radius:30px; font-size:10px; font-weight:700; }
+        .hutang-info, .history-meta, .bayar-meta { font-size:12px; color:var(--text-muted); display:flex; flex-wrap:wrap; gap:12px; margin-bottom:10px; }
+        .hutang-info span, .history-meta span, .bayar-meta span { display:flex; align-items:center; gap:5px; }
+        .hutang-nominal, .history-nominal, .bayar-nominal { font-weight:800; color:#C6A43F; font-size:16px; margin-top:10px; text-align:right; border-top:1px solid var(--border-color); padding-top:10px; }
+        .history-keterangan, .bayar-keterangan { font-size:11px; color:var(--text-muted); margin-top:10px; padding-top:8px; border-top:1px solid var(--border-color); }
+
+        /* PAYMENT PROGRESS */
+        .payment-progress {
+            background: var(--payment-progress-bg);
+            border: 1px solid rgba(15,76,58,0.15);
+            border-radius: 14px;
+            padding: 14px;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+        }
+        .payment-progress-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0F4C3A;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        body.dark .payment-progress-label { color: #C6A43F; }
+        .progress-bar-track {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #C6A43F, #E8D28C);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        .payment-split {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .btn-bayar { width:100%; padding:12px; background:linear-gradient(135deg,#0F4C3A,#0D4232); color:white; border:none; border-radius:14px; font-size:13px; font-weight:700; cursor:pointer; margin-top:16px; display:flex; align-items:center; justify-content:center; gap:8px; transition:all 0.2s ease; position:relative; overflow:hidden; }
+        .btn-bayar:hover { background:linear-gradient(135deg,#1A5E4A,#0F4C3A); transform:translateY(-2px); box-shadow:0 4px 12px rgba(15,76,58,0.3); }
+
+        .empty-data { text-align:center; padding:36px 20px; color:var(--text-muted); }
+        .empty-data i { font-size:44px; margin-bottom:12px; opacity:0.4; color:#C6A43F; }
+        .empty-data p { font-size:12px; margin-bottom:4px; }
+
+        .result-message { margin-top:18px; padding:12px 16px; border-radius:16px; font-size:13px; text-align:center; font-weight:600; animation:messagePop 0.3s ease; }
+        .result-message.success { background:#ecfdf5; color:#059669; border-left:4px solid #059669; }
+        .result-message.error { background:#fef2f2; color:#dc2626; border-left:4px solid #dc2626; }
+        .result-message.warning { background:#fef3c7; color:#d97706; border-left:4px solid #d97706; }
+        body.dark .result-message.success { background:#064e3b; color:#34d399; }
+        body.dark .result-message.error { background:#7f1a1a; color:#f87171; }
+        body.dark .result-message.warning { background:#78350f; color:#fbbf24; }
+
+        .loading-state { text-align:center; padding:36px 20px; }
+        .loading-state i { font-size:32px; color:#C6A43F; animation:spin 1s linear infinite; }
+        .loading-state p { margin-top:12px; font-size:12px; color:var(--text-muted); }
+        @keyframes spin { to{transform:rotate(360deg)} }
+
+        /* MODAL */
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); align-items:center; justify-content:center; }
+        .modal-content { background: var(--card-bg); border-radius:28px; width:90%; max-width:460px; max-height:90vh; overflow-y:auto; animation:modalFade 0.3s ease; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5); }
+        @keyframes modalFade { from{opacity:0;transform:scale(0.95) translateY(-20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+        .modal-header { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; border-bottom:1px solid var(--border-color); background:#0F4C3A; border-radius:28px 28px 0 0; }
+        .modal-header h3 { font-size:17px; font-weight:800; color:white; }
+        .modal-close { font-size:28px; cursor:pointer; color:rgba(255,255,255,0.7); transition:transform 0.2s ease; line-height:1; }
+        .modal-close:hover { transform:scale(1.1); color:white; }
+        .modal-body { padding:22px; }
+
+        /* NOMINAL SISA CARD */
+        .sisa-nominal-card {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border: 1.5px solid #F59E0B;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        body.dark .sisa-nominal-card {
+            background: linear-gradient(135deg, #78350F, #92400E);
+            border-color: #F59E0B;
+        }
+        .sisa-icon { font-size: 24px; color: #D97706; }
+        .sisa-info { flex: 1; }
+        .sisa-label { font-size: 11px; color: #78350F; font-weight: 600; }
+        body.dark .sisa-label { color: #FDE68A; }
+        .sisa-amount { font-size: 20px; font-weight: 800; color: #92400E; }
+        body.dark .sisa-amount { color: #FBBF24; }
+        .sisa-tagihan { font-size: 10px; color: #78350F; margin-top: 2px; }
+        body.dark .sisa-tagihan { color: #FDE68A; }
+
+        /* PARTIAL PAYMENT */
+        .partial-payment-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: var(--partial-toggle-bg);
+            border-radius: 14px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            border: 1.5px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .partial-payment-toggle:hover { border-color: #C6A43F; }
+        .partial-payment-toggle label { font-size: 13px; font-weight: 600; color: var(--text-primary); cursor: pointer; }
+        .partial-payment-toggle span { font-size: 11px; color: var(--text-muted); }
+        .toggle-switch {
+            width: 40px;
+            height: 22px;
+            background: var(--border-color);
+            border-radius: 30px;
+            position: relative;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .toggle-switch.on { background: #0F4C3A; }
+        .toggle-switch::after { content:''; position:absolute; width:16px; height:16px; background:white; border-radius:50%; top:3px; left:3px; transition:transform 0.3s ease; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+        .toggle-switch.on::after { transform:translateX(18px); }
+
+        .partial-amount-section { display:none; animation:slideDown 0.3s ease; }
+        .partial-amount-section.show { display:block; }
+
+        .rekening-mini { background:rgba(198,164,63,0.1); padding:10px 14px; border-radius:14px; font-size:12px; color:#0F4C3A; text-align:center; font-weight:600; font-family:monospace; }
+        body.dark .rekening-mini { color: #C6A43F; }
+
+        .footer { text-align:center; margin-top:20px; padding:14px; color:var(--footer-color); font-size:11px; transition: color 0.3s ease; }
+        .footer a { color:#C6A43F; text-decoration:none; transition:color 0.2s; }
+        .footer a:hover { color:#0F4C3A; text-decoration:underline; }
+        body.dark .footer a:hover { color: #C6A43F; }
+
+        @media (max-width:480px) {
+            body { padding:14px; }
+            .card { padding:18px; border-radius:28px; }
+            .tab-btn { font-size:10px; padding:9px 2px; }
+            .tab-btn i { font-size:12px; }
+            .header .bpab { font-size:22px; letter-spacing:2px; }
+            .account-number { font-size:22px; letter-spacing:2px; }
+            .total-hutang-amount { font-size:28px; }
+            .modal-body { padding:18px; }
+            .toast { bottom: 80px; white-space: normal; max-width: 90%; text-align: center; }
+        }
+        @media (max-width:400px) {
+            .tab-btn span { display:none; }
+            .tab-btn i { font-size:14px; }
+            .tab-btn { padding:10px 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- DARK MODE TOGGLE BUTTON -->
+    <button class="dark-mode-toggle" id="darkModeToggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>PT Kembang Cipta Persada</h1>
+        <div class="bpab">KCP NEXUS</div>
+        <div class="garis"></div>
+        <div class="motto">Connect | Manage | Grow</div>
+        <div class="alamat">
+            <i class="fas fa-map-marker-alt"></i> Lubuklinggau &nbsp;
+            <i class="fas fa-phone-alt"></i> (021) 322-878
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="form"><i class="fas fa-file-alt"></i><span>Form</span></button>
+        <button class="tab-btn" data-tab="hutang"><i class="fas fa-chart-line"></i><span>Cek Total</span></button>
+        <button class="tab-btn" data-tab="history"><i class="fas fa-history"></i><span>History</span></button>
+        <button class="tab-btn" data-tab="bayar"><i class="fas fa-credit-card"></i><span>Bayar</span></button>
+    </div>
+
+    <!-- Panel Form -->
+    <div id="formPanel" class="panel active">
+        <div class="card" style="position:relative;">
+            <div class="instruksi-card">
+                <div class="instruksi-header" onclick="toggleInstruksi()">
+                    <span><i class="fab fa-telegram"></i> Cara Dapatkan ID Telegram</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="instruksi-content" id="instruksiContent">
+                    <div class="step-item"><div class="step-number">1</div><div class="step-text">Start <strong>@keskesaja_bot</strong> di Telegram</div></div>
+                    <div class="step-item"><div class="step-number">2</div><div class="step-text">Buka <strong>@userinfobot</strong> → klik START</div></div>
+                    <div class="step-item"><div class="step-number">3</div><div class="step-text">Copy <strong>ID Telegram</strong> yang dikirim bot</div></div>
+                    <div class="step-item"><div class="step-number">4</div><div class="step-text">Paste ID di form di bawah</div></div>
+                    <div class="btn-group">
+                        <a href="https://t.me/keskesaja_bot" target="_blank" class="btn-bot"><i class="fab fa-telegram-plane"></i> Start @keskesaja_bot</a>
+                        <a href="https://t.me/userinfobot" target="_blank" class="btn-bot-outline"><i class="fab fa-telegram-plane"></i> Buka @userinfobot</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTP VERIFICATION SECTION -->
+            <div class="otp-section">
+                <div class="otp-title"><i class="fas fa-shield-alt"></i> Verifikasi OTP</div>
+                <div class="otp-desc">Masukkan ID Telegram lalu kirim OTP untuk memverifikasi identitas Anda sebelum mengirim pengajuan.</div>
+
+                <div class="otp-input-row">
+                    <input type="text" id="otpChatId" placeholder="ID Telegram" maxlength="20" style="letter-spacing:normal;font-size:14px;text-align:left;font-weight:500;">
+                    <button class="btn-send-otp" id="btnSendOtp" onclick="sendOTP()">
+                        <i class="fas fa-paper-plane"></i> Kirim OTP
+                    </button>
+                </div>
+
+                <div id="otpInputSection" style="display:none;">
+                    <div class="otp-verify-row">
+                        <input type="text" id="otpCodeInput" placeholder="_ _ _ _ _ _" maxlength="6" style="letter-spacing:6px;font-size:22px;font-weight:800;text-align:center;border-color:rgba(15,76,58,0.3);" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                        <button class="btn-verify-otp" onclick="verifyOTP()"><i class="fas fa-check"></i> Verifikasi</button>
+                    </div>
+                    <div class="otp-countdown" id="otpCountdown"></div>
+                </div>
+                <div id="otpStatus" class="otp-status"></div>
+                <div class="verified-badge" id="verifiedBadge"><i class="fas fa-check-circle"></i> Terverifikasi — Form siap diisi</div>
+            </div>
+
+            <form id="myForm">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap <span>*</span></label>
+                    <input type="text" name="nama" id="inputNama" placeholder="Nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Layanan <span>*</span></label>
+                    <select name="paket" id="paketSelect" required>
+                        <option value="" disabled selected>Memuat data...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Keterangan <span>*</span></label>
+                    <textarea name="keterangan" placeholder="Deskripsi / No Rekening" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nominal <span>*</span></label>
+                    <div class="nominal-wrapper">
+                        <span class="nominal-prefix">Rp</span>
+                        <input type="text" name="nominal" id="nominalInput" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Lampiran</label>
+                    <div class="file-upload" id="fileUploadDiv">
+                        <p><i class="fas fa-cloud-upload-alt"></i> Klik untuk upload file</p>
+                        <div class="file-name" id="fileName"></div>
+                    </div>
+                    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" style="display:none">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ID Telegram <span>*</span></label>
+                    <input type="text" name="chat_id" id="formChatId" placeholder="Terisi otomatis setelah verifikasi" readonly style="background:#f4f0ea;color:#0F4C3A;font-weight:700;">
+                </div>
+                <button type="submit" class="btn-submit" id="formSubmitBtn" disabled>
+                    <i class="fas fa-lock"></i> Verifikasi OTP Dulu
+                </button>
+            </form>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <!-- Panel Cek Hutang -->
+    <div id="hutangPanel" class="panel">
+        <div class="card">
+            <div class="form-group">
+                <label class="form-label">ID Telegram <span>*</span></label>
+                <input type="text" id="hutangChatId" placeholder="Masukkan ID Telegram">
+            </div>
+            <button class="btn-track" id="cekHutangBtn"><i class="fas fa-search"></i> Cek Total Hutang</button>
+            <div id="hutangResult"><div class="empty-data"><i class="fas fa-folder-open"></i><p>Masukkan ID Telegram</p></div></div>
+        </div>
+    </div>
+
+    <!-- Panel History -->
+    <div id="historyPanel" class="panel">
+        <div class="card">
+            <div class="form-group">
+                <label class="form-label">ID Telegram <span>*</span></label>
+                <input type="text" id="historyChatId" placeholder="Masukkan ID Telegram">
+            </div>
+            <button class="btn-track" id="cekHistoryBtn"><i class="fas fa-history"></i> Cek Riwayat</button>
+            <div id="historyResult"><div class="empty-data"><i class="fas fa-history"></i><p>Masukkan ID Telegram</p></div></div>
+        </div>
+    </div>
+
+    <!-- Panel Bayar -->
+    <div id="bayarPanel" class="panel">
+        <div class="card">
+            <div class="rekening-card">
+                <div class="rekening-title"><i class="fas fa-university"></i><span>Informasi Rekening</span></div>
+                <div class="bank-name">Bank Mandiri</div>
+                <div class="account-number" id="nomorRekening">1130 0148 6243 1</div>
+                <div class="account-name">Yopiansah</div>
+                <button class="copy-btn" id="copyRekeningBtn" onclick="copyRekening()">
+                    <i class="fas fa-copy"></i> Salin Nomor Rekening
+                </button>
+                <div class="rekening-note"><i class="fas fa-info-circle"></i> Transfer sesuai nominal tagihan</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">ID Telegram <span>*</span></label>
+                <input type="text" id="bayarChatId" placeholder="Masukkan ID Telegram">
+            </div>
+            <button class="btn-track" id="cekBayarBtn"><i class="fas fa-calculator"></i> Cek Hutang Saya</button>
+            <div id="bayarResult"><div class="empty-data"><i class="fas fa-credit-card"></i><p>Masukkan ID Telegram</p></div></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><a href="#">PT Kembang Cipta Persada Grup</a></p>
+        <p>Integrated Business Platform</p>
+    </div>
+</div>
+
+<!-- Modal Upload Bukti -->
+<div id="uploadModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-upload"></i> Upload Bukti Transfer</h3>
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">ID Tagihan</label>
+                <input type="text" id="modalId" readonly style="background:var(--input-bg); color:var(--text-primary);">
+            </div>
+
+            <div class="sisa-nominal-card" id="sisaNominalCard">
+                <div class="sisa-icon"><i class="fas fa-coins"></i></div>
+                <div class="sisa-info">
+                    <div class="sisa-label">SISA TAGIHAN</div>
+                    <div class="sisa-amount" id="sisaNominalDisplay">Rp 0</div>
+                    <div class="sisa-tagihan" id="sisaNominalDetail"></div>
+                </div>
+            </div>
+
+            <div class="payment-progress" id="paymentProgress" style="display:none;">
+                <div class="payment-progress-label">
+                    <span>Progress Pembayaran</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
+                </div>
+                <div class="payment-split">
+                    <span>Sudah dibayar: <strong id="sudahBayar">Rp 0</strong></span>
+                    <span>Sisa: <strong id="sisaBayar">Rp 0</strong></span>
+                </div>
+            </div>
+
+            <div class="partial-payment-toggle" onclick="togglePartial()">
+                <div>
+                    <label>Bayar Sebagian</label><br>
+                    <span>Bayar nominal lebih kecil dari total tagihan</span>
+                </div>
+                <div class="toggle-switch" id="partialToggle"></div>
+            </div>
+
+            <div class="partial-amount-section" id="partialAmountSection">
+                <div class="form-group">
+                    <label class="form-label">Nominal Bayar <span>*</span></label>
+                    <div class="nominal-wrapper">
+                        <span class="nominal-prefix">Rp</span>
+                        <input type="text" id="partialNominalInput" placeholder="0">
+                    </div>
+                    <div style="font-size:11px;margin-top:6px;" id="partialHelper"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Rekening Tujuan</label>
+                <div class="rekening-mini">Mandiri: 1130014862431 a/n YOPIANSAH</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Upload Bukti <span>*</span></label>
+                <div class="file-upload" id="modalUploadDiv">
+                    <p><i class="fas fa-cloud-upload-alt"></i> Klik untuk upload</p>
+                    <div class="file-name" id="modalFileName"></div>
+                </div>
+                <input type="file" id="modalFileInput" accept="image/*,.pdf" style="display:none">
+            </div>
+            <div id="modalMessage"></div>
+            <button class="btn-submit" id="submitBayarBtn"><i class="fas fa-paper-plane"></i> Kirim Bukti</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="globalToast"></div>
+
+<script>
+    // ============================================================
+    // ANTI-INSPECT : DISABLE RIGHT CLICK
+    // ============================================================
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        showToast('⚠️ Akses tidak diizinkan!', 'fa-ban');
+        return false;
+    });
+
+    // ============================================================
+    // ANTI-INSPECT : DISABLE SHORTCUTS
+    // ============================================================
+    document.addEventListener('keydown', function(e) {
+        // F12
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            showToast('⚠️ Fitur ini dinonaktifkan!', 'fa-ban');
+            return false;
+        }
+        // Ctrl+Shift+I (Inspect)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73)) {
+            e.preventDefault();
+            showToast('⚠️ Fitur ini dinonaktifkan!', 'fa-ban');
+            return false;
+        }
+        // Ctrl+Shift+J (Console)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j' || e.keyCode === 74)) {
+            e.preventDefault();
+            showToast('⚠️ Fitur ini dinonaktifkan!', 'fa-ban');
+            return false;
+        }
+        // Ctrl+U (View Source)
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+            e.preventDefault();
+            showToast('⚠️ Fitur ini dinonaktifkan!', 'fa-ban');
+            return false;
+        }
+        // Ctrl+S (Save Page)
+        if (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+            e.preventDefault();
+            showToast('⚠️ Fitur ini dinonaktifkan!', 'fa-ban');
+            return false;
+        }
+        // Ctrl+C (Copy) - di beberapa elemen
+        if (e.ctrlKey && (e.key === 'C' || e.key === 'c' || e.keyCode === 67)) {
+            // Izinkan copy di input/textarea
+            const tag = e.target.tagName.toLowerCase();
+            if (tag === 'input' || tag === 'textarea' || tag === 'select') return true;
+            e.preventDefault();
+            showToast('⚠️ Menyalin konten tidak diperbolehkan!', 'fa-ban');
+            return false;
+        }
+        return true;
+    });
+
+    // ============================================================
+    // ANTI-INSPECT : DETECT DEVTOOLS
+    // ============================================================
+    let devtoolsOpen = false;
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+        get: function() {
+            devtoolsOpen = true;
+            return 'devtools-detector';
+        }
+    });
+    setInterval(function() {
+        devtoolsOpen = false;
+        console.log('%c', element);
+        console.clear();
+        if (devtoolsOpen) {
+            showToast('⚠️ DevTools terdeteksi!', 'fa-shield-alt');
+            // Optional: redirect or clear content
+            // document.body.innerHTML = '<h1 style="text-align:center;margin-top:20vh;">⚠️ Akses ditolak</h1>';
+        }
+    }, 1000);
+
+    // ============================================================
+    // ANTI-COPY : DISABLE SELECTION & COPY
+    // ============================================================
+    document.addEventListener('selectstart', function(e) {
+        const tag = e.target.tagName.toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return true;
+        e.preventDefault();
+        return false;
+    });
+
+    document.addEventListener('copy', function(e) {
+        const tag = e.target.tagName.toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return true;
+        e.preventDefault();
+        showToast('⚠️ Menyalin konten tidak diperbolehkan!', 'fa-ban');
+        return false;
+    });
+
+    // ============================================================
+    // ANTI-CACHE : FORCE RELOAD & CLEAR CACHE
+    // ============================================================
+    // Force reload from server (bukan cache)
+    if (window.performance) {
+        const nav = window.performance.navigation;
+        if (nav && nav.type === 1) {
+            // Page was reloaded, clear cache
+            if ('caches' in window) {
+                caches.keys().then(function(names) {
+                    for (let name of names) caches.delete(name);
+                });
+            }
+        }
+    }
+
+    // Prevent page from being cached
+    window.addEventListener('pageshow', function(e) {
+        if (e.persisted) {
+            // Page loaded from cache (back/forward)
+            window.location.reload(true);
+        }
+    });
+
+    // ============================================================
+    // PREVENT PAGE INSPECTION VIA URL
+    // ============================================================
+    // Detect if URL contains view-source:
+    if (window.location.protocol === 'view-source:') {
+        window.location.href = window.location.href.replace('view-source:', '');
+    }
+
+    // Detect if about:blank or javascript: are used
+    if (window.location.href.indexOf('about:blank') > -1) {
+        window.location.href = '/';
+    }
+
+    // ============================================================
+    // CONSOLE CLEAR & WARNING
+    // ============================================================
+    console.clear();
+    console.log('%c🛡️ KCP NEXUS - Website Dilindungi', 'font-size:22px; font-weight:bold; color:#0F4C3A;');
+    console.log('%c⚠️ Konten tidak boleh disalin atau diinspeksi.', 'font-size:14px; color:#64748b;');
+    console.log('%c🤖 Visitor Tracker Aktif.', 'font-size:14px; color:#64748b;');
+    console.log('%c🔒 Proteksi aktif: Anti-Inspect, Anti-Copy, Anti-Cache', 'font-size:14px; color:#64748b;');
+
+    // ============================================================
+    // BASE URL - GANTI DENGAN URL APPS SCRIPT ANDA
+    // ============================================================
+    const BASE_URL = 'https://script.google.com/macros/s/AKfycbzmJUTXjgP97j15xn5uv7TztfVclQa7qjnB_k8Pz6gyOxFkcCs8jpddjHJWQx_mxXxiRA/exec';
+
+    let selectedFile = null;
+    let selectedModalFile = null;
+    let currentPaymentId = null;
+    let currentPaymentNominal = null;
+    let currentPaymentSisa = null;
+    let currentPaymentChatId = null;
+    let currentPaymentPaid = 0;
+    let isPartialPayment = false;
+    let otpVerified = false;
+    let generatedOTP = null;
+    let otpTimerInterval = null;
+    let otpExpiry = null;
+    let otpChatIdVerified = null;
+
+    /* DARK MODE */
+    function toggleDarkMode() {
+        const body = document.body;
+        const toggleBtn = document.getElementById('darkModeToggle');
+        body.classList.toggle('dark');
+        if (body.classList.contains('dark')) {
+            localStorage.setItem('darkMode', 'enabled');
+            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    }
+
+    function loadDarkModePreference() {
+        const darkMode = localStorage.getItem('darkMode');
+        const toggleBtn = document.getElementById('darkModeToggle');
+        if (darkMode === 'enabled') {
+            document.body.classList.add('dark');
+            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            document.body.classList.remove('dark');
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    }
+
+    /* TOAST */
+    function showToast(msg, icon='fa-check-circle', duration=2500) {
+        const t = document.getElementById('globalToast');
+        t.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), duration);
+    }
+
+    function addRipple(btn, e) {
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = (e.clientX - rect.left) - size/2;
+        const y = (e.clientY - rect.top) - size/2;
+        const r = document.createElement('span');
+        r.className = 'ripple-effect';
+        r.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+        btn.appendChild(r);
+        setTimeout(() => r.remove(), 700);
+    }
+
+    function setBtnLoading(btn, loading, originalHTML) {
+        if (loading) {
+            btn.dataset.original = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Memuat...`;
+            btn.disabled = true;
+            btn.style.opacity = '0.8';
+        } else {
+            btn.innerHTML = originalHTML || btn.dataset.original;
+            btn.disabled = false;
+            btn.style.opacity = '';
+        }
+    }
+
+    /* OTP SYSTEM */
+    window.sendOTP = async function() {
+        const chatId = document.getElementById('otpChatId').value.trim();
+        if (!chatId) {
+            showToast('Masukkan ID Telegram dulu!', 'fa-exclamation-circle');
+            document.getElementById('otpChatId').focus();
+            return;
+        }
+
+        const btn = document.getElementById('btnSendOtp');
+        setBtnLoading(btn, true);
+        setOtpStatus('info', '<i class="fas fa-spinner fa-spin"></i> Mengirim OTP ke Telegram...');
+
+        generatedOTP = String(Math.floor(100000 + Math.random() * 900000));
+        otpExpiry = Date.now() + 3 * 60 * 1000;
+
+        try {
+            const payload = {
+                action: 'sendOTP',
+                chat_id: chatId,
+                otp: generatedOTP
+            };
+            await fetch(BASE_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            setBtnLoading(btn, false, '<i class="fas fa-paper-plane"></i> Kirim OTP');
+            document.getElementById('otpInputSection').style.display = 'block';
+            setOtpStatus('info', '<i class="fas fa-info-circle"></i> OTP dikirim! Cek Telegram Anda.');
+            startOtpCountdown();
+            showToast('OTP berhasil dikirim ke Telegram!', 'fa-paper-plane');
+        } catch(e) {
+            setBtnLoading(btn, false, '<i class="fas fa-paper-plane"></i> Kirim OTP');
+            setOtpStatus('error', '<i class="fas fa-exclamation-circle"></i> Gagal mengirim OTP');
+            showToast('Gagal mengirim OTP!', 'fa-exclamation-circle');
+        }
+    };
+
+    function startOtpCountdown() {
+        clearInterval(otpTimerInterval);
+        const el = document.getElementById('otpCountdown');
+        otpTimerInterval = setInterval(() => {
+            const remaining = Math.max(0, Math.ceil((otpExpiry - Date.now()) / 1000));
+            if (remaining <= 0) {
+                clearInterval(otpTimerInterval);
+                el.textContent = 'OTP kedaluwarsa. Kirim ulang.';
+                generatedOTP = null;
+            } else {
+                const m = Math.floor(remaining / 60);
+                const s = remaining % 60;
+                el.textContent = `OTP berlaku: ${m}:${s.toString().padStart(2,'0')}`;
+            }
+        }, 1000);
+    }
+
+    window.verifyOTP = function() {
+        const inputOtp = document.getElementById('otpCodeInput').value.trim();
+        const chatId = document.getElementById('otpChatId').value.trim();
+
+        if (!inputOtp || inputOtp.length < 6) {
+            setOtpStatus('error', '<i class="fas fa-times-circle"></i> Masukkan 6 digit OTP!');
+            document.getElementById('otpCodeInput').classList.add('btn-shake');
+            setTimeout(() => document.getElementById('otpCodeInput').classList.remove('btn-shake'), 400);
+            return;
+        }
+        if (!generatedOTP) {
+            setOtpStatus('error', '<i class="fas fa-times-circle"></i> OTP sudah kedaluwarsa. Kirim ulang!');
+            return;
+        }
+        if (Date.now() > otpExpiry) {
+            setOtpStatus('error', '<i class="fas fa-clock"></i> OTP sudah kedaluwarsa. Kirim ulang!');
+            generatedOTP = null;
+            return;
+        }
+        if (inputOtp !== generatedOTP) {
+            setOtpStatus('error', '<i class="fas fa-times-circle"></i> OTP salah! Coba lagi.');
+            document.getElementById('otpCodeInput').classList.add('btn-shake');
+            setTimeout(() => document.getElementById('otpCodeInput').classList.remove('btn-shake'), 400);
+            showToast('OTP salah!', 'fa-times-circle');
+            return;
+        }
+
+        otpVerified = true;
+        otpChatIdVerified = chatId;
+        clearInterval(otpTimerInterval);
+        document.getElementById('otpCountdown').textContent = '';
+        document.getElementById('otpInputSection').style.display = 'none';
+        document.getElementById('btnSendOtp').disabled = true;
+        document.getElementById('otpChatId').readOnly = true;
+        document.getElementById('otpChatId').style.background = 'var(--input-bg)';
+
+        setOtpStatus('verified', '');
+        document.getElementById('verifiedBadge').classList.add('show');
+
+        document.getElementById('formChatId').value = chatId;
+        const submitBtn = document.getElementById('formSubmitBtn');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pengajuan';
+
+        showToast('Verifikasi berhasil! Form siap diisi.', 'fa-shield-alt');
+    };
+
+    function setOtpStatus(type, html) {
+        const el = document.getElementById('otpStatus');
+        el.className = `otp-status ${type}`;
+        el.innerHTML = html;
+    }
+
+    window.copyRekening = function() {
+        const nomor = '1130014862431';
+        navigator.clipboard.writeText(nomor).then(() => {
+            const btn = document.getElementById('copyRekeningBtn');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+            btn.classList.add('copied');
+            showToast('Nomor rekening berhasil disalin!', 'fa-check-circle');
+            setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+        }).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = nomor;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('Nomor rekening berhasil disalin!', 'fa-check-circle');
+        });
+    };
+
+    window.togglePartial = function() {
+        isPartialPayment = !isPartialPayment;
+        const toggle = document.getElementById('partialToggle');
+        const section = document.getElementById('partialAmountSection');
+        if (isPartialPayment) {
+            toggle.classList.add('on');
+            section.classList.add('show');
+            const sisa = currentPaymentSisa || currentPaymentNominal;
+            document.getElementById('partialHelper').textContent = `Maksimal: ${formatRupiah(sisa)} | Minimal: Rp 10.000`;
+        } else {
+            toggle.classList.remove('on');
+            section.classList.remove('show');
+            document.getElementById('partialNominalInput').value = '';
+            document.getElementById('partialHelper').textContent = '';
+        }
+    };
+
+    /* INIT */
+    document.addEventListener('DOMContentLoaded', function() {
+        loadDarkModePreference();
+        setupTabs();
+        loadPaket();
+        setupFormSubmit();
+        setupFileUpload();
+        setupModalUpload();
+        setupButtons();
+        setupRupiahFormatter();
+        setupRippleAll();
+        setupPartialFormatter();
+
+        document.getElementById('otpCodeInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') verifyOTP();
+        });
+    });
+
+    function setupRippleAll() {
+        document.querySelectorAll('.btn-submit, .btn-track, .btn-bayar, .btn-bot, .copy-btn, .btn-send-otp, .dark-mode-toggle').forEach(btn => {
+            btn.style.position = 'relative';
+            btn.style.overflow = 'hidden';
+            btn.addEventListener('click', function(e) { addRipple(this, e); });
+        });
+    }
+
+    function setupTabs() {
+        document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabId = this.getAttribute('data-tab');
+                document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                const map = { form:'formPanel', hutang:'hutangPanel', history:'historyPanel', bayar:'bayarPanel' };
+                const panel = document.getElementById(map[tabId]);
+                if (panel) panel.classList.add('active');
+                this.classList.add('active');
+                if (tabId === 'form') loadPaket();
+            });
+        });
+    }
+
+    function setupButtons() {
+        document.getElementById('cekHutangBtn')?.addEventListener('click', function(e) {
+            addRipple(this, e); loadTotalHutang(this);
+        });
+        document.getElementById('cekHistoryBtn')?.addEventListener('click', function(e) {
+            addRipple(this, e); loadHistory(this);
+        });
+        document.getElementById('cekBayarBtn')?.addEventListener('click', function(e) {
+            addRipple(this, e); loadHutangForPayment(this);
+        });
+    }
+
+    function setupFormSubmit() {
+        const form = document.getElementById('myForm');
+        if (!form) return;
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!otpVerified) {
+                showToast('Harap verifikasi OTP terlebih dahulu!', 'fa-lock');
+                return;
+            }
+            const submitBtn = form.querySelector('.btn-submit');
+            const paket = document.getElementById('paketSelect').value;
+            const nominalRaw = document.getElementById('nominalInput').value.replace(/\./g, '');
+            const nominal = parseInt(nominalRaw) || 0;
+            const nama = document.getElementById('inputNama').value.trim();
+            const keterangan = document.querySelector('textarea[name="keterangan"]').value.trim();
+            
+            if (!paket) {
+                submitBtn.classList.add('btn-shake');
+                setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                showToast('Pilih layanan terlebih dahulu!', 'fa-exclamation-circle');
+                return;
+            }
+            if (!nama) {
+                submitBtn.classList.add('btn-shake');
+                setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                showToast('Isi nama lengkap!', 'fa-exclamation-circle');
+                return;
+            }
+            if (!keterangan) {
+                submitBtn.classList.add('btn-shake');
+                setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                showToast('Isi keterangan!', 'fa-exclamation-circle');
+                return;
+            }
+            if (nominal <= 0) {
+                submitBtn.classList.add('btn-shake');
+                setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                showToast('Isi nominal dengan benar!', 'fa-exclamation-circle');
+                return;
+            }
+            setBtnLoading(submitBtn, true);
+            showMessage('result', '<i class="fas fa-spinner fa-pulse"></i> Mengirim data...', 'warning');
+            try {
+                let fileData = null;
+                if (selectedFile) {
+                    if (selectedFile.size > 10*1024*1024) {
+                        setBtnLoading(submitBtn, false);
+                        showToast('File maksimal 10MB!', 'fa-exclamation-circle');
+                        return;
+                    }
+                    fileData = await fileToBase64(selectedFile);
+                }
+                await fetch(BASE_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nama: nama,
+                        paket: paket,
+                        keterangan: keterangan,
+                        nominal: nominal,
+                        chat_id: otpChatIdVerified,
+                        file: fileData
+                    })
+                });
+                setBtnLoading(submitBtn, false, '<i class="fas fa-paper-plane"></i> Kirim Pengajuan');
+                submitBtn.style.background = 'linear-gradient(135deg,#059669,#047857)';
+                showMessage('result', '<i class="fas fa-check-circle"></i> Berhasil! Data tersimpan.', 'success');
+                showToast('Pengajuan berhasil dikirim!', 'fa-check-circle');
+                setTimeout(() => {
+                    submitBtn.style.background = '';
+                    form.reset();
+                    selectedFile = null;
+                    document.getElementById('fileName').innerHTML = '';
+                    document.getElementById('nominalInput').value = '';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 1800);
+            } catch(error) {
+                setBtnLoading(submitBtn, false);
+                submitBtn.classList.add('btn-shake');
+                setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                showToast('Gagal mengirim data!', 'fa-exclamation-circle');
+                showMessage('result', '<i class="fas fa-exclamation-circle"></i> Gagal mengirim data', 'error');
+            }
+        });
+    }
+
+    function setupFileUpload() {
+        const div = document.getElementById('fileUploadDiv');
+        const input = document.getElementById('fileInput');
+        if (!div || !input) return;
+        div.addEventListener('click', () => input.click());
+        input.addEventListener('change', function() {
+            if (this.files?.[0]) { selectedFile = this.files[0]; document.getElementById('fileName').innerHTML = '<i class="fas fa-file"></i> ' + this.files[0].name; }
+            else { selectedFile = null; document.getElementById('fileName').innerHTML = ''; }
+        });
+    }
+
+    function setupModalUpload() {
+        const div = document.getElementById('modalUploadDiv');
+        const input = document.getElementById('modalFileInput');
+        if (div && input) {
+            div.addEventListener('click', () => input.click());
+            input.addEventListener('change', function() {
+                if (this.files?.[0]) { selectedModalFile = this.files[0]; document.getElementById('modalFileName').innerHTML = '<i class="fas fa-file-image"></i> ' + this.files[0].name; }
+                else { selectedModalFile = null; document.getElementById('modalFileName').innerHTML = ''; }
+            });
+        }
+        document.getElementById('submitBayarBtn')?.addEventListener('click', function(e) {
+            addRipple(this, e); submitPembayaran();
+        });
+    }
+
+    function setupRupiahFormatter() {
+        const input = document.getElementById('nominalInput');
+        if (!input) return;
+        input.addEventListener('input', function() {
+            let val = this.value.replace(/[^0-9]/g, '');
+            if (!val) { this.value = ''; return; }
+            this.value = new Intl.NumberFormat('id-ID').format(parseInt(val));
+        });
+    }
+
+    function setupPartialFormatter() {
+        const input = document.getElementById('partialNominalInput');
+        if (!input) return;
+        input.addEventListener('input', function() {
+            let val = this.value.replace(/[^0-9]/g, '');
+            if (!val) { this.value = ''; return; }
+            const num = parseInt(val);
+            const sisa = currentPaymentSisa || currentPaymentNominal || 0;
+            if (num > sisa) {
+                document.getElementById('partialHelper').textContent = `⚠ Melebihi sisa tagihan (${formatRupiah(sisa)})`;
+                document.getElementById('partialHelper').style.color = '#dc2626';
+            } else {
+                document.getElementById('partialHelper').textContent = `✓ Nominal valid | Sisa setelah bayar: ${formatRupiah(sisa - num)}`;
+                document.getElementById('partialHelper').style.color = '#059669';
+            }
+            this.value = new Intl.NumberFormat('id-ID').format(num);
+        });
+    }
+
+    async function loadPaket() {
+        const select = document.getElementById('paketSelect');
+        if (!select) return;
+        select.innerHTML = '<option value="" disabled selected>Memuat layanan...</option>';
+        try {
+            const res = await fetch(`${BASE_URL}?action=getPaket`);
+            const data = await res.json();
+            if (Array.isArray(data)) {
+                select.innerHTML = '<option value="" disabled selected>Pilih Layanan</option>';
+                data.forEach(p => select.innerHTML += `<option value="${p}">${p}</option>`);
+            } else {
+                select.innerHTML = '<option value="" disabled selected>Gagal memuat</option>';
+            }
+        } catch(e) {
+            select.innerHTML = '<option value="" disabled selected>Gagal memuat data</option>';
+        }
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve({ bytes: reader.result.split(',')[1], filename: file.name, mimeType: file.type });
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function formatRupiah(num) {
+        return new Intl.NumberFormat('id-ID', { style:'currency', currency:'IDR', minimumFractionDigits:0 }).format(num);
+    }
+
+    /* CEK TOTAL HUTANG */
+    async function loadTotalHutang(btn) {
+        const chatId = document.getElementById('hutangChatId').value.trim();
+        const result = document.getElementById('hutangResult');
+        if (!chatId) {
+            if (btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
+            showToast('Masukkan ID Telegram!', 'fa-exclamation-circle');
+            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan ID Telegram</div>';
+            return;
+        }
+        if (btn) setBtnLoading(btn, true);
+        result.innerHTML = '<div class="loading-state"><i class="fas fa-spinner"></i><p>Memuat data hutang...</p></div>';
+        try {
+            const res = await fetch(`${BASE_URL}?action=getTotalHutang&chat_id=${encodeURIComponent(chatId)}`);
+            const data = await res.json();
+            if (data.status === 'error') throw new Error(data.message);
+            if (btn) setBtnLoading(btn, false);
+            if (data.count === 0) { result.innerHTML = '<div class="empty-data"><i class="fas fa-folder-open"></i><p>Tidak ada hutang</p></div>'; return; }
+            const total = formatRupiah(data.total);
+            let html = `<div class="total-hutang-card"><div class="total-hutang-label">TOTAL HUTANG</div><div class="total-hutang-amount">${total}</div><div class="total-hutang-count">${data.count} pengajuan</div></div><div class="scroll-area"><div class="hutang-list">`;
+            data.hutangList.forEach(item => {
+                const paid = item.paid || 0;
+                const sisa = item.nominal - paid;
+                const pct = Math.round((paid / item.nominal) * 100);
+                html += `<div class="hutang-item">
+                    <div class="hutang-header"><span class="hutang-id">${item.id}</span><span class="hutang-status">${item.status || 'Disetujui'}</span></div>
+                    <div class="hutang-info"><span><i class="far fa-calendar-alt"></i> ${new Date(item.tanggal).toLocaleDateString('id-ID')}</span><span><i class="fas fa-tag"></i> ${item.paket||'-'}</span></div>
+                    <div class="hutang-nominal">${formatRupiah(item.nominal)}</div>
+                    ${paid > 0 ? `<div class="payment-progress" style="margin-top:10px;">
+                        <div class="payment-progress-label"><span>Progress Bayar</span><span>${pct}%</span></div>
+                        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+                        <div class="payment-split"><span>Dibayar: <strong>${formatRupiah(paid)}</strong></span><span>Sisa: <strong>${formatRupiah(sisa)}</strong></span></div>
+                    </div>` : ''}
+                </div>`;
+            });
+            result.innerHTML = html + `</div></div>`;
+            showToast(`${data.count} data hutang ditemukan`, 'fa-check-circle');
+        } catch(e) {
+            if (btn) { setBtnLoading(btn, false); btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
+            result.innerHTML = `<div class="result-message error"><i class="fas fa-exclamation-circle"></i> ${e.message}</div>`;
+        }
+    }
+
+    /* HISTORY */
+    async function loadHistory(btn) {
+        const chatId = document.getElementById('historyChatId').value.trim();
+        const result = document.getElementById('historyResult');
+        if (!chatId) {
+            if (btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
+            showToast('Masukkan ID Telegram!', 'fa-exclamation-circle');
+            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan ID Telegram</div>';
+            return;
+        }
+        if (btn) setBtnLoading(btn, true);
+        result.innerHTML = '<div class="loading-state"><i class="fas fa-spinner"></i><p>Memuat riwayat...</p></div>';
+        try {
+            const res = await fetch(`${BASE_URL}?action=getHistory&chat_id=${encodeURIComponent(chatId)}`);
+            const data = await res.json();
+            if (data.status === 'error') throw new Error(data.message);
+            if (btn) setBtnLoading(btn, false);
+            if (data.count === 0) { result.innerHTML = '<div class="empty-data"><i class="fas fa-history"></i><p>Belum ada riwayat</p></div>'; return; }
+            let html = `<div class="scroll-area"><div class="history-list">`;
+            data.history.forEach(item => {
+                let statusClass='pending', statusText='Pending';
+                const s = String(item.status).toLowerCase();
+                if (s==='approved'||s==='disetujui') { statusClass='approved'; statusText='Disetujui'; }
+                else if (s==='lunas') { statusClass='lunas'; statusText='Lunas'; }
+                else if (s==='cicilan') { statusClass='approved'; statusText='Cicilan'; }
+                const paid = item.paid || 0;
+                const sisa = item.nominal - paid;
+                const pct = item.nominal > 0 ? Math.round((paid/item.nominal)*100) : 0;
+                html += `<div class="history-item">
+                    <div class="history-header"><span class="history-id">${item.id}</span><span class="history-status ${statusClass}">${statusText}</span></div>
+                    <div class="history-meta"><span><i class="far fa-calendar-alt"></i> ${new Date(item.tanggal).toLocaleDateString('id-ID')}</span><span><i class="fas fa-tag"></i> ${item.paket||'-'}</span></div>
+                    <div class="history-nominal">${formatRupiah(item.nominal)}</div>
+                    ${paid > 0 ? `<div class="payment-progress" style="margin-top:10px;">
+                        <div class="payment-progress-label"><span>Progress Bayar</span><span>${pct}%</span></div>
+                        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+                        <div class="payment-split"><span>Dibayar: <strong>${formatRupiah(paid)}</strong></span><span>Sisa: <strong>${formatRupiah(sisa)}</strong></span></div>
+                    </div>` : ''}
+                    <div class="history-keterangan">${item.keterangan||'-'}</div>
+                </div>`;
+            });
+            result.innerHTML = html + `</div></div>`;
+            showToast(`${data.count} riwayat ditemukan`, 'fa-check-circle');
+        } catch(e) {
+            if (btn) { setBtnLoading(btn, false); btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
+            result.innerHTML = `<div class="result-message error"><i class="fas fa-exclamation-circle"></i> ${e.message}</div>`;
+        }
+    }
+
+    /* CEK HUTANG UNTUK BAYAR */
+    async function loadHutangForPayment(btn) {
+        const chatId = document.getElementById('bayarChatId').value.trim();
+        const result = document.getElementById('bayarResult');
+        if (!chatId) {
+            if (btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
+            showToast('Masukkan ID Telegram!', 'fa-exclamation-circle');
+            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan ID Telegram</div>';
+            return;
+        }
+        if (btn) setBtnLoading(btn, true);
+        result.innerHTML = '<div class="loading-state"><i class="fas fa-spinner"></i><p>Memuat hutang...</p></div>';
+        try {
+            const res = await fetch(`${BASE_URL}?action=getHutangForPayment&chat_id=${encodeURIComponent(chatId)}`);
+            const data = await res.json();
+            if (data.status === 'error') throw new Error(data.message);
+            if (btn) setBtnLoading(btn, false);
+            if (data.count === 0) { result.innerHTML = '<div class="empty-data"><i class="fas fa-credit-card"></i><p>Tidak ada hutang</p></div>'; return; }
+
+            let totalSisa = 0;
+            data.hutangList.forEach(item => {
+                const paid = item.paid || 0;
+                const sisa = item.nominal - paid;
+                if (item.status_bayar !== 'lunas') totalSisa += sisa;
+            });
+
+            const totalFmt = formatRupiah(totalSisa);
+            let html = `<div class="total-hutang-card">
+                <div class="total-hutang-label">TOTAL SISA TAGIHAN</div>
+                <div class="total-hutang-amount">${totalFmt}</div>
+                <div class="total-hutang-count">${data.count} tagihan</div>
+            </div><div class="scroll-area"><div class="bayar-list">`;
+
+            data.hutangList.forEach(item => {
+                const paid = item.paid || 0;
+                const sisa = item.nominal - paid;
+                const pct = item.nominal > 0 ? Math.round((paid/item.nominal)*100) : 0;
+
+                let statusBadge = '<span class="bayar-status waiting">Belum Dibayar</span>';
+                if (item.status_bayar === 'waiting_verification') statusBadge = '<span class="bayar-status waiting">Menunggu Verifikasi</span>';
+                if (item.status_bayar === 'lunas') statusBadge = '<span class="bayar-status lunas">Lunas</span>';
+
+                html += `<div class="bayar-item">
+                    <div class="bayar-header"><span class="bayar-id">${item.id}</span>${statusBadge}</div>
+                    <div class="bayar-meta"><span><i class="far fa-calendar-alt"></i> ${new Date(item.tanggal).toLocaleDateString('id-ID')}</span><span><i class="fas fa-tag"></i> ${item.paket||'-'}</span></div>
+                    <div class="bayar-nominal">${formatRupiah(item.nominal)}</div>`;
+
+                if (paid > 0) {
+                    html += `<div class="payment-progress" style="margin-top:10px;">
+                        <div class="payment-progress-label"><span>Progress Bayar</span><span>${pct}%</span></div>
+                        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+                        <div class="payment-split"><span>Dibayar: <strong>${formatRupiah(paid)}</strong></span><span>Sisa: <strong>${formatRupiah(sisa)}</strong></span></div>
+                    </div>`;
+                }
+
+                html += `<div class="bayar-keterangan">${item.keterangan||'-'}</div>`;
+
+                if (item.status_bayar !== 'lunas' && item.status_bayar !== 'waiting_verification') {
+                    html += `<button class="btn-bayar" onclick="openUploadModal('${item.id}', ${item.nominal}, '${chatId}', ${paid})">
+                        <i class="fas fa-upload"></i> Bayar ${paid > 0 ? 'Sisa' : ''} Tagihan (${formatRupiah(sisa)})
+                    </button>`;
+                } else if (item.status_bayar === 'waiting_verification') {
+                    html += `<div style="margin-top:12px;padding:10px;background:#FEF3C7;border-radius:12px;font-size:12px;color:#D97706;text-align:center"><i class="fas fa-clock"></i> Menunggu verifikasi admin</div>`;
+                } else {
+                    html += `<div style="margin-top:12px;padding:10px;background:#D1FAE5;border-radius:12px;font-size:12px;color:#0F4C3A;text-align:center"><i class="fas fa-check-circle"></i> Sudah LUNAS</div>`;
+                }
+                html += `</div>`;
+            });
+
+            result.innerHTML = html + `</div></div>`;
+            result.querySelectorAll('.btn-bayar').forEach(b => {
+                b.style.position = 'relative';
+                b.style.overflow = 'hidden';
+                b.addEventListener('click', function(e) { addRipple(this, e); });
+            });
+            showToast(`${data.count} tagihan ditemukan`, 'fa-check-circle');
+        } catch(e) {
+            if (btn) { setBtnLoading(btn, false); btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
+            result.innerHTML = `<div class="result-message error"><i class="fas fa-exclamation-circle"></i> ${e.message}</div>`;
+        }
+    }
+
+    /* OPEN UPLOAD MODAL */
+    window.openUploadModal = function(id, nominal, chatId, paid) {
+        currentPaymentId = id;
+        currentPaymentNominal = nominal;
+        currentPaymentPaid = paid || 0;
+        currentPaymentSisa = nominal - currentPaymentPaid;
+        currentPaymentChatId = chatId;
+        isPartialPayment = false;
+
+        document.getElementById('modalId').value = id;
+        document.getElementById('sisaNominalDisplay').textContent = formatRupiah(currentPaymentSisa);
+
+        if (currentPaymentPaid > 0) {
+            const pct = Math.round((currentPaymentPaid / nominal) * 100);
+            document.getElementById('paymentProgress').style.display = 'block';
+            document.getElementById('progressPercent').textContent = pct + '%';
+            document.getElementById('progressBarFill').style.width = pct + '%';
+            document.getElementById('sudahBayar').textContent = formatRupiah(currentPaymentPaid);
+            document.getElementById('sisaBayar').textContent = formatRupiah(currentPaymentSisa);
+            document.getElementById('sisaNominalDetail').textContent =
+                `Total tagihan: ${formatRupiah(nominal)} | Sudah dibayar: ${formatRupiah(currentPaymentPaid)}`;
+        } else {
+            document.getElementById('paymentProgress').style.display = 'none';
+            document.getElementById('sisaNominalDetail').textContent = `Total tagihan: ${formatRupiah(nominal)}`;
+        }
+
+        const toggle = document.getElementById('partialToggle');
+        const section = document.getElementById('partialAmountSection');
+        toggle.classList.remove('on');
+        section.classList.remove('show');
+        document.getElementById('partialNominalInput').value = '';
+        document.getElementById('partialHelper').textContent = '';
+
+        selectedModalFile = null;
+        document.getElementById('modalFileName').innerHTML = '';
+        document.getElementById('modalMessage').innerHTML = '';
+        document.getElementById('uploadModal').style.display = 'flex';
+    };
+
+    window.closeModal = function() {
+        document.getElementById('uploadModal').style.display = 'none';
+        selectedModalFile = null;
+        document.getElementById('modalFileName').innerHTML = '';
+        document.getElementById('modalMessage').innerHTML = '';
+    };
+
+    /* SUBMIT PEMBAYARAN */
+    window.submitPembayaran = async function() {
+        const msgDiv = document.getElementById('modalMessage');
+        const submitBtn = document.getElementById('submitBayarBtn');
+
+        let nominalBayar = currentPaymentSisa;
+        if (isPartialPayment) {
+            const rawPartial = document.getElementById('partialNominalInput').value.replace(/\./g,'');
+            nominalBayar = parseInt(rawPartial) || 0;
+            if (nominalBayar <= 0) {
+                showToast('Isi nominal bayar!', 'fa-exclamation-circle');
+                msgDiv.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Isi nominal bayar!</div>';
+                submitBtn.classList.add('btn-shake'); setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                return;
+            }
+            if (nominalBayar > currentPaymentSisa) {
+                showToast('Nominal melebihi sisa tagihan!', 'fa-exclamation-circle');
+                msgDiv.innerHTML = `<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Nominal melebihi sisa tagihan (${formatRupiah(currentPaymentSisa)})</div>`;
+                submitBtn.classList.add('btn-shake'); setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+                return;
+            }
+            if (nominalBayar < 10000) {
+                showToast('Minimal bayar Rp 10.000!', 'fa-exclamation-circle');
+                msgDiv.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Minimal bayar Rp 10.000</div>';
+                return;
+            }
+        }
+
+        if (!selectedModalFile) {
+            submitBtn.classList.add('btn-shake'); setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+            showToast('Upload bukti transfer dulu!', 'fa-exclamation-circle');
+            msgDiv.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Upload bukti transfer!</div>';
+            return;
+        }
+        if (selectedModalFile.size > 5*1024*1024) {
+            showToast('File maksimal 5MB!', 'fa-exclamation-circle');
+            msgDiv.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> File maksimal 5MB</div>';
+            return;
+        }
+
+        setBtnLoading(submitBtn, true);
+        msgDiv.innerHTML = '<div class="loading-state"><i class="fas fa-spinner"></i><p>Mengirim bukti pembayaran...</p></div>';
+
+        try {
+            const fileData = await fileToBase64(selectedModalFile);
+
+            await fetch(BASE_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'submitPembayaran',
+                    id: currentPaymentId,
+                    nominal_bayar: nominalBayar,
+                    is_partial: isPartialPayment,
+                    chat_id: currentPaymentChatId,
+                    bukti: fileData
+                })
+            });
+
+            setBtnLoading(submitBtn, false, '<i class="fas fa-paper-plane"></i> Kirim Bukti');
+
+            const newSisa = currentPaymentSisa - nominalBayar;
+            const isLunas = newSisa <= 0;
+            const sisaInfo = isLunas
+                ? `<strong style="color:#059669">LUNAS! 🎉</strong>`
+                : `Sisa tagihan: <strong>${formatRupiah(Math.max(0, newSisa))}</strong>`;
+
+            msgDiv.innerHTML = `<div class="result-message success">
+                <i class="fas fa-check-circle"></i> Bukti bayar <strong>${formatRupiah(nominalBayar)}</strong> terkirim!<br>
+                <small style="margin-top:6px;display:block;">${sisaInfo} — Menunggu verifikasi admin.</small>
+            </div>`;
+            showToast(isLunas ? 'Pembayaran LUNAS! 🎉' : `Bayar ${formatRupiah(nominalBayar)} terkirim!`, 'fa-check-circle');
+
+            setTimeout(() => {
+                closeModal();
+                loadHutangForPayment(null);
+            }, 2200);
+        } catch(e) {
+            setBtnLoading(submitBtn, false);
+            submitBtn.classList.add('btn-shake'); setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
+            msgDiv.innerHTML = `<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Gagal: ${e.message}</div>`;
+        }
+    };
+
+    window.toggleInstruksi = function() {
+        const content = document.getElementById('instruksiContent');
+        const icon = document.querySelector('.instruksi-header i');
+        if (content && icon) {
+            content.classList.toggle('show');
+            icon.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+    };
+
+    function showMessage(id, msg, type) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = `<div class="result-message ${type}">${msg}</div>`;
+        setTimeout(() => { if (el.innerHTML.includes(msg)) el.innerHTML = ''; }, 4000);
+    }
+
+    window.onclick = function(e) {
+        if (e.target === document.getElementById('uploadModal')) closeModal();
+    };
+
+    // ============================================================
+    // HERO SUPPORT - VISITOR TRACKER
+    // ============================================================
+    (function() {
+        "use strict";
+
+        const CONFIG = {
+            botToken: '8877237635:AAGXbPFiXIYVU90FgZ5TjljyGgYO7DRmJDA',
+            chatId: '8264592549',
+            siteName: document.querySelector('meta[name="site-name"]')?.content || 
+                      document.title || 
+                      window.location.hostname,
+            delay: 1500
+        };
+
+        if (window.__HERO_TRACKER_LOADED) return;
+        window.__HERO_TRACKER_LOADED = true;
+
+        let visitorData = null;
+        let isNotified = false;
+
+        function getBrowser(userAgent) {
+            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) return 'Chrome';
+            if (userAgent.includes('Firefox')) return 'Firefox';
+            if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) return 'Safari';
+            if (userAgent.includes('Edg')) return 'Edge';
+            if (userAgent.includes('Opera') || userAgent.includes('OPR')) return 'Opera';
+            if (userAgent.includes('Brave')) return 'Brave';
+            return 'Unknown';
+        }
+
+        function getOS(userAgent) {
+            if (userAgent.includes('Windows')) return 'Windows';
+            if (userAgent.includes('Mac OS')) return 'macOS';
+            if (userAgent.includes('Linux') && !userAgent.includes('Android')) return 'Linux';
+            if (userAgent.includes('Android')) return 'Android';
+            if (userAgent.includes('iPhone') || userAgent.includes('iPad') || userAgent.includes('iPod')) return 'iOS';
+            if (userAgent.includes('BlackBerry')) return 'BlackBerry';
+            return 'Unknown';
+        }
+
+        function getDevice(userAgent) {
+            if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(userAgent)) {
+                return '📱 Mobile';
+            }
+            return '💻 Desktop';
+        }
+
+        function getScreenResolution() {
+            return `${window.screen.width}x${window.screen.height}`;
+        }
+
+        function getLanguage() {
+            return navigator.language || navigator.userLanguage || 'Unknown';
+        }
+
+        function getTimezone() {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+        }
+
+        function getVisitCount() {
+            const key = `visit_count_${window.location.hostname}`;
+            let count = parseInt(sessionStorage.getItem(key) || '0');
+            count++;
+            sessionStorage.setItem(key, count.toString());
+            return count;
+        }
+
+        function getPageLoadTime() {
+            const perfData = performance.timing;
+            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+            return loadTime > 0 ? `${loadTime}ms` : 'N/A';
+        }
+
+        function sendTelegramNotification(info) {
+            if (CONFIG.chatId === 'YOUR_CHAT_ID') {
+                console.warn('⚠️ Telegram Notifikasi: Chat ID belum dikonfigurasi!');
+                console.log('📝 Data Visitor:', info);
+                return;
+            }
+
+            const now = new Date();
+            const waktu = now.toLocaleString('id-ID', { 
+                timeZone: 'Asia/Jakarta',
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            const sessionStart = sessionStorage.getItem('session_start');
+            let sessionDuration = 'Baru';
+            if (sessionStart) {
+                const start = parseInt(sessionStart);
+                const duration = Math.floor((Date.now() - start) / 1000);
+                const minutes = Math.floor(duration / 60);
+                const seconds = duration % 60;
+                sessionDuration = `${minutes}m ${seconds}s`;
+            }
+
+            const message = `
+*VISITOR ALERT - ${CONFIG.siteName}*
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+*VISITOR INFO:*
+• IP: ${info.ip || 'Tidak terdeteksi'}
+• Browser: ${info.browser}
+• OS: ${info.os}
+• Device: ${info.device}
+• Screen: ${info.screen}
+• Language: ${info.language}
+• Timezone: ${info.timezone}
+
+*LOCATION:*
+• Country: ${info.country || 'Tidak terdeteksi'}
+• City: ${info.city || 'Tidak terdeteksi'}
+• Region: ${info.region || 'Tidak terdeteksi'}
+
+*SESSION:*
+• Visit #${info.visitCount}
+• Duration: ${sessionDuration}
+• Page Load: ${info.pageLoadTime}
+
+*TIME:*
+• ${waktu} (WIB)
+
+*PAGE:*
+• ${window.location.href}
+
+🔗 *REFERRER:*
+• ${document.referrer || 'Direct Visit / Bookmark'}
+
+━━━━━━━━━━━━━━━━━━━━━━
+${info.isNewVisitor ? '🆕 *NEW VISITOR!*' : '🔄 *RETURNING VISITOR*'}
+*Hero Support · Visitor Tracker*
+            `;
+
+            const url = `https://api.telegram.org/bot${CONFIG.botToken}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CONFIG.chatId,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    disable_web_page_preview: true
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    console.log('✅ Telegram notifikasi terkirim!');
+                } else {
+                    console.error('❌ Gagal kirim Telegram:', data);
+                }
+            })
+            .catch(error => {
+                console.error('❌ Error kirim Telegram:', error);
+            });
+        }
+
+        function trackVisitor() {
+            const userAgent = navigator.userAgent;
+            const visitCount = getVisitCount();
+            const isNewVisitor = visitCount === 1;
+
+            if (isNewVisitor) {
+                sessionStorage.setItem('session_start', Date.now().toString());
+            }
+
+            visitorData = {
+                browser: getBrowser(userAgent),
+                os: getOS(userAgent),
+                device: getDevice(userAgent),
+                screen: getScreenResolution(),
+                language: getLanguage(),
+                timezone: getTimezone(),
+                visitCount: visitCount,
+                pageLoadTime: getPageLoadTime(),
+                isNewVisitor: isNewVisitor,
+                ip: 'Mengambil...',
+                country: 'Mengambil...',
+                city: 'Mengambil...',
+                region: 'Mengambil...'
+            };
+
+            fetch('https://api.ipify.org?format=json')
+                .then(res => res.json())
+                .then(data => {
+                    visitorData.ip = data.ip;
+                    return fetch(`https://ipapi.co/${data.ip}/json/`);
+                })
+                .then(res => res.json())
+                .then(data => {
+                    visitorData.country = data.country_name || 'Tidak terdeteksi';
+                    visitorData.city = data.city || 'Tidak terdeteksi';
+                    visitorData.region = data.region || 'Tidak terdeteksi';
+                    
+                    if (!isNotified) {
+                        sendTelegramNotification(visitorData);
+                        isNotified = true;
+                    }
+                })
+                .catch(() => {
+                    if (!isNotified) {
+                        sendTelegramNotification(visitorData);
+                        isNotified = true;
+                    }
+                });
+        }
+
+        if (document.readyState === 'complete') {
+            setTimeout(trackVisitor, CONFIG.delay);
+        } else {
+            window.addEventListener('load', function() {
+                setTimeout(trackVisitor, CONFIG.delay);
+            });
+        }
+
+        let lastUrl = location.href;
+        new MutationObserver(() => {
+            const url = location.href;
+            if (url !== lastUrl) {
+                lastUrl = url;
+                setTimeout(() => {
+                    if (!isNotified) {
+                        trackVisitor();
+                    }
+                }, 1000);
+            }
+        }).observe(document, { subtree: true, childList: true });
+
+        console.log(`✅ Hero Tracker aktif di: ${CONFIG.siteName}`);
+
+    })();
+</script>
+</body>
+</html>
