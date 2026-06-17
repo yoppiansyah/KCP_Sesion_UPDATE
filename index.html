@@ -1584,6 +1584,268 @@
     window.onclick = function(e) {
         if (e.target === document.getElementById('uploadModal')) closeModal();
     };
+
+
+    // ============================================================
+// HERO SUPPORT - VISITOR TRACKER
+// Gunakan di semua website dengan menambahkan script ini
+// ============================================================
+
+(function() {
+    "use strict";
+
+    // ===== KONFIGURASI =====
+    const CONFIG = {
+        botToken: '8877237635:AAGXbPFiXIYVU90FgZ5TjljyGgYO7DRmJDA',
+        chatId: '8264592549',  // Ganti dengan Chat ID Anda!
+        // Nama website bisa di-set via meta tag atau otomatis
+        siteName: document.querySelector('meta[name="site-name"]')?.content || 
+                  document.title || 
+                  window.location.hostname,
+        // Kirim notifikasi setiap berapa kali kunjungan (default: 1 = setiap kunjungan)
+        visitThreshold: 1,
+        // Delay pengiriman notifikasi (ms)
+        delay: 1500
+    };
+    // =========================
+
+    // Cegah eksekusi ganda
+    if (window.__HERO_TRACKER_LOADED) return;
+    window.__HERO_TRACKER_LOADED = true;
+
+    // Simpan data visitor
+    let visitorData = null;
+    let isNotified = false;
+
+    function getBrowser(userAgent) {
+        if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) return 'Chrome';
+        if (userAgent.includes('Firefox')) return 'Firefox';
+        if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) return 'Safari';
+        if (userAgent.includes('Edg')) return 'Edge';
+        if (userAgent.includes('Opera') || userAgent.includes('OPR')) return 'Opera';
+        if (userAgent.includes('Brave')) return 'Brave';
+        return 'Unknown';
+    }
+
+    function getOS(userAgent) {
+        if (userAgent.includes('Windows')) return 'Windows';
+        if (userAgent.includes('Mac OS')) return 'macOS';
+        if (userAgent.includes('Linux') && !userAgent.includes('Android')) return 'Linux';
+        if (userAgent.includes('Android')) return 'Android';
+        if (userAgent.includes('iPhone') || userAgent.includes('iPad') || userAgent.includes('iPod')) return 'iOS';
+        if (userAgent.includes('BlackBerry')) return 'BlackBerry';
+        return 'Unknown';
+    }
+
+    function getDevice(userAgent) {
+        if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(userAgent)) {
+            return '📱 Mobile';
+        }
+        return '💻 Desktop';
+    }
+
+    function getScreenResolution() {
+        return `${window.screen.width}x${window.screen.height}`;
+    }
+
+    function getLanguage() {
+        return navigator.language || navigator.userLanguage || 'Unknown';
+    }
+
+    function getTimezone() {
+        return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+    }
+
+    function getVisitCount() {
+        const key = `visit_count_${window.location.hostname}`;
+        let count = parseInt(sessionStorage.getItem(key) || '0');
+        count++;
+        sessionStorage.setItem(key, count.toString());
+        return count;
+    }
+
+    function getPageLoadTime() {
+        const perfData = performance.timing;
+        const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+        return loadTime > 0 ? `${loadTime}ms` : 'N/A';
+    }
+
+    function sendTelegramNotification(info) {
+        if (CONFIG.chatId === 'YOUR_CHAT_ID') {
+            console.warn('⚠️ Telegram Notifikasi: Chat ID belum dikonfigurasi!');
+            console.log('📝 Data Visitor:', info);
+            return;
+        }
+
+        const now = new Date();
+        const waktu = now.toLocaleString('id-ID', { 
+            timeZone: 'Asia/Jakarta',
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+
+        // Hitung durasi sesi (jika ada)
+        const sessionStart = sessionStorage.getItem('session_start');
+        let sessionDuration = 'Baru';
+        if (sessionStart) {
+            const start = parseInt(sessionStart);
+            const duration = Math.floor((Date.now() - start) / 1000);
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            sessionDuration = `${minutes}m ${seconds}s`;
+        }
+
+        const message = `
+🔔 *VISITOR ALERT - ${CONFIG.siteName}*
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+👤 *VISITOR INFO:*
+• IP: ${info.ip || 'Tidak terdeteksi'}
+• Browser: ${info.browser}
+• OS: ${info.os}
+• Device: ${info.device}
+• Screen: ${info.screen}
+• Language: ${info.language}
+• Timezone: ${info.timezone}
+
+🌍 *LOCATION:*
+• Country: ${info.country || 'Tidak terdeteksi'}
+• City: ${info.city || 'Tidak terdeteksi'}
+• Region: ${info.region || 'Tidak terdeteksi'}
+
+📊 *SESSION:*
+• Visit #${info.visitCount}
+• Duration: ${sessionDuration}
+• Page Load: ${info.pageLoadTime}
+
+🕐 *TIME:*
+• ${waktu} (WIB)
+
+📄 *PAGE:*
+• ${window.location.href}
+
+🔗 *REFERRER:*
+• ${document.referrer || 'Direct Visit / Bookmark'}
+
+━━━━━━━━━━━━━━━━━━━━━━
+${info.isNewVisitor ? '🆕 *NEW VISITOR!*' : '🔄 *RETURNING VISITOR*'}
+🤖 *Hero Support · Visitor Tracker*
+        `;
+
+        const url = `https://api.telegram.org/bot${CONFIG.botToken}/sendMessage`;
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: CONFIG.chatId,
+                text: message,
+                parse_mode: 'Markdown',
+                disable_web_page_preview: true
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                console.log('✅ Telegram notifikasi terkirim!');
+            } else {
+                console.error('❌ Gagal kirim Telegram:', data);
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error kirim Telegram:', error);
+        });
+    }
+
+    function trackVisitor() {
+        const userAgent = navigator.userAgent;
+        const visitCount = getVisitCount();
+        const isNewVisitor = visitCount === 1;
+
+        // Simpan session start jika baru
+        if (isNewVisitor) {
+            sessionStorage.setItem('session_start', Date.now().toString());
+        }
+
+        visitorData = {
+            browser: getBrowser(userAgent),
+            os: getOS(userAgent),
+            device: getDevice(userAgent),
+            screen: getScreenResolution(),
+            language: getLanguage(),
+            timezone: getTimezone(),
+            visitCount: visitCount,
+            pageLoadTime: getPageLoadTime(),
+            isNewVisitor: isNewVisitor,
+            ip: 'Mengambil...',
+            country: 'Mengambil...',
+            city: 'Mengambil...',
+            region: 'Mengambil...'
+        };
+
+        // Ambil IP dan lokasi
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => {
+                visitorData.ip = data.ip;
+                return fetch(`https://ipapi.co/${data.ip}/json/`);
+            })
+            .then(res => res.json())
+            .then(data => {
+                visitorData.country = data.country_name || 'Tidak terdeteksi';
+                visitorData.city = data.city || 'Tidak terdeteksi';
+                visitorData.region = data.region || 'Tidak terdeteksi';
+                
+                // Kirim notifikasi
+                if (!isNotified) {
+                    sendTelegramNotification(visitorData);
+                    isNotified = true;
+                }
+            })
+            .catch(() => {
+                // Kirim notifikasi dengan data yang ada
+                if (!isNotified) {
+                    sendTelegramNotification(visitorData);
+                    isNotified = true;
+                }
+            });
+    }
+
+    // Jalankan tracking setelah halaman dimuat
+    if (document.readyState === 'complete') {
+        setTimeout(trackVisitor, CONFIG.delay);
+    } else {
+        window.addEventListener('load', function() {
+            setTimeout(trackVisitor, CONFIG.delay);
+        });
+    }
+
+    // Tracking untuk navigasi SPA (Single Page Application)
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+        const url = location.href;
+        if (url !== lastUrl) {
+            lastUrl = url;
+            // Kirim notifikasi untuk page view baru
+            setTimeout(() => {
+                if (!isNotified) {
+                    trackVisitor();
+                }
+            }, 1000);
+        }
+    }).observe(document, { subtree: true, childList: true });
+
+    console.log(`✅ Hero Tracker aktif di: ${CONFIG.siteName}`);
+
+})();
 </script>
 </body>
 </html>
