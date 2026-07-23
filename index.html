@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#0F4C3A">
     <meta name="site-name" content="KCP NEXUS - Financial Platform">
     <meta name="site-type" content="financial-nexus">
-    
+
     <!-- ===== ANTI-CACHE & REFRESH PROTECTION ===== -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Clear-Site-Data" content="cache, cookies, storage, executionContexts">
-    
+
     <title>KCP NEXUS | Premium Financial Nexus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,7 +26,7 @@
             -ms-user-select: none;
             user-select: none;
         }
-        
+
         /* ===== INJECTOR PROTECTION ===== */
         body::before {
             content: '';
@@ -632,28 +632,24 @@
         <div class="card" style="position:relative;">
             <div class="instruksi-card">
                 <div class="instruksi-header" onclick="toggleInstruksi()">
-                    <span><i class="fab fa-telegram"></i> Cara Dapatkan ID Telegram</span>
+                    <span><i class="fab fa-whatsapp"></i> Verifikasi Nomor WhatsApp</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="instruksi-content" id="instruksiContent">
-                    <div class="step-item"><div class="step-number">1</div><div class="step-text">Start <strong>@keskesaja_bot</strong> di Telegram</div></div>
-                    <div class="step-item"><div class="step-number">2</div><div class="step-text">Buka <strong>@userinfobot</strong> → klik START</div></div>
-                    <div class="step-item"><div class="step-number">3</div><div class="step-text">Copy <strong>ID Telegram</strong> yang dikirim bot</div></div>
-                    <div class="step-item"><div class="step-number">4</div><div class="step-text">Paste ID di form di bawah</div></div>
-                    <div class="btn-group">
-                        <a href="https://t.me/keskesaja_bot" target="_blank" class="btn-bot"><i class="fab fa-telegram-plane"></i> Start @keskesaja_bot</a>
-                        <a href="https://t.me/userinfobot" target="_blank" class="btn-bot-outline"><i class="fab fa-telegram-plane"></i> Buka @userinfobot</a>
-                    </div>
+                    <div class="step-item"><div class="step-number">1</div><div class="step-text">Pastikan nomor WhatsApp Anda <strong>aktif</strong> dan bisa menerima pesan</div></div>
+                    <div class="step-item"><div class="step-number">2</div><div class="step-text">Masukkan nomor WhatsApp di kolom bawah, contoh: <strong>6281234567890</strong></div></div>
+                    <div class="step-item"><div class="step-number">3</div><div class="step-text">Klik <strong>Kirim OTP</strong>, kode akan masuk ke WhatsApp Anda</div></div>
+                    <div class="step-item"><div class="step-number">4</div><div class="step-text">Masukkan kode OTP untuk verifikasi</div></div>
                 </div>
             </div>
 
             <!-- OTP VERIFICATION SECTION -->
             <div class="otp-section">
                 <div class="otp-title"><i class="fas fa-shield-alt"></i> Verifikasi OTP</div>
-                <div class="otp-desc">Masukkan ID Telegram lalu kirim OTP untuk memverifikasi identitas Anda sebelum mengirim pengajuan.</div>
+                <div class="otp-desc">Masukkan Nomor WhatsApp lalu kirim OTP untuk memverifikasi identitas Anda sebelum mengirim pengajuan.</div>
 
                 <div class="otp-input-row">
-                    <input type="text" id="otpChatId" placeholder="ID Telegram" maxlength="20" style="letter-spacing:normal;font-size:14px;text-align:left;font-weight:500;">
+                    <input type="tel" id="otpChatId" placeholder="Nomor WhatsApp (cth: 6281234567890)" maxlength="15" inputmode="numeric" style="letter-spacing:normal;font-size:14px;text-align:left;font-weight:500;">
                     <button class="btn-send-otp" id="btnSendOtp" onclick="sendOTP()">
                         <i class="fas fa-paper-plane"></i> Kirim OTP
                     </button>
@@ -701,7 +697,7 @@
                     <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" style="display:none">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">ID Telegram <span>*</span></label>
+                    <label class="form-label">Nomor WhatsApp <span>*</span></label>
                     <input type="text" name="chat_id" id="formChatId" placeholder="Terisi otomatis setelah verifikasi" readonly style="background:#f4f0ea;color:#0F4C3A;font-weight:700;">
                 </div>
                 <button type="submit" class="btn-submit" id="formSubmitBtn" disabled>
@@ -716,11 +712,11 @@
     <div id="hutangPanel" class="panel">
         <div class="card">
             <div class="form-group">
-                <label class="form-label">ID Telegram <span>*</span></label>
-                <input type="text" id="hutangChatId" placeholder="Masukkan ID Telegram">
+                <label class="form-label">Nomor WhatsApp <span>*</span></label>
+                <input type="tel" id="hutangChatId" placeholder="Masukkan Nomor WhatsApp" inputmode="numeric">
             </div>
             <button class="btn-track" id="cekHutangBtn"><i class="fas fa-search"></i> Cek Total Hutang</button>
-            <div id="hutangResult"><div class="empty-data"><i class="fas fa-folder-open"></i><p>Masukkan ID Telegram</p></div></div>
+            <div id="hutangResult"><div class="empty-data"><i class="fas fa-folder-open"></i><p>Masukkan Nomor WhatsApp</p></div></div>
         </div>
     </div>
 
@@ -728,11 +724,11 @@
     <div id="historyPanel" class="panel">
         <div class="card">
             <div class="form-group">
-                <label class="form-label">ID Telegram <span>*</span></label>
-                <input type="text" id="historyChatId" placeholder="Masukkan ID Telegram">
+                <label class="form-label">Nomor WhatsApp <span>*</span></label>
+                <input type="tel" id="historyChatId" placeholder="Masukkan Nomor WhatsApp" inputmode="numeric">
             </div>
             <button class="btn-track" id="cekHistoryBtn"><i class="fas fa-history"></i> Cek Riwayat</button>
-            <div id="historyResult"><div class="empty-data"><i class="fas fa-history"></i><p>Masukkan ID Telegram</p></div></div>
+            <div id="historyResult"><div class="empty-data"><i class="fas fa-history"></i><p>Masukkan Nomor WhatsApp</p></div></div>
         </div>
     </div>
 
@@ -751,11 +747,11 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">ID Telegram <span>*</span></label>
-                <input type="text" id="bayarChatId" placeholder="Masukkan ID Telegram">
+                <label class="form-label">Nomor WhatsApp <span>*</span></label>
+                <input type="tel" id="bayarChatId" placeholder="Masukkan Nomor WhatsApp" inputmode="numeric">
             </div>
             <button class="btn-track" id="cekBayarBtn"><i class="fas fa-calculator"></i> Cek Hutang Saya</button>
-            <div id="bayarResult"><div class="empty-data"><i class="fas fa-credit-card"></i><p>Masukkan ID Telegram</p></div></div>
+            <div id="bayarResult"><div class="empty-data"><i class="fas fa-credit-card"></i><p>Masukkan Nomor WhatsApp</p></div></div>
         </div>
     </div>
 
@@ -979,13 +975,12 @@
     console.clear();
     console.log('%c🛡️ KCP NEXUS - Website Dilindungi', 'font-size:22px; font-weight:bold; color:#0F4C3A;');
     console.log('%c⚠️ Konten tidak boleh disalin atau diinspeksi.', 'font-size:14px; color:#64748b;');
-    console.log('%c🤖 Visitor Tracker Aktif.', 'font-size:14px; color:#64748b;');
     console.log('%c🔒 Proteksi aktif: Anti-Inspect, Anti-Copy, Anti-Cache', 'font-size:14px; color:#64748b;');
 
     // ============================================================
     // BASE URL - GANTI DENGAN URL APPS SCRIPT ANDA
     // ============================================================
-    const BASE_URL = 'https://script.google.com/macros/s/AKfycbzmJUTXjgP97j15xn5uv7TztfVclQa7qjnB_k8Pz6gyOxFkcCs8jpddjHJWQx_mxXxiRA/exec';
+    const BASE_URL = 'https://script.google.com/macros/s/AKfycbwQaumyZRBS1CLIoiv1SxYHNh6EmS9N4d6MW2kXokjYVlHOX8Jt2mnluw3-ZlUDZml2IQ/exec';
 
     let selectedFile = null;
     let selectedModalFile = null;
@@ -1000,6 +995,14 @@
     let otpTimerInterval = null;
     let otpExpiry = null;
     let otpChatIdVerified = null;
+
+    /* NORMALISASI NOMOR WHATSAPP */
+    // Ubah 0812xxxx -> 62812xxxx, buang karakter non-digit
+    function normalizeNomorWA(value) {
+        let digits = String(value || '').replace(/[^0-9]/g, '');
+        if (digits.startsWith('0')) digits = '62' + digits.slice(1);
+        return digits;
+    }
 
     /* DARK MODE */
     function toggleDarkMode() {
@@ -1062,16 +1065,16 @@
 
     /* OTP SYSTEM */
     window.sendOTP = async function() {
-        const chatId = document.getElementById('otpChatId').value.trim();
+        const chatId = normalizeNomorWA(document.getElementById('otpChatId').value.trim());
         if (!chatId) {
-            showToast('Masukkan ID Telegram dulu!', 'fa-exclamation-circle');
+            showToast('Masukkan Nomor WhatsApp dulu!', 'fa-exclamation-circle');
             document.getElementById('otpChatId').focus();
             return;
         }
 
         const btn = document.getElementById('btnSendOtp');
         setBtnLoading(btn, true);
-        setOtpStatus('info', '<i class="fas fa-spinner fa-spin"></i> Mengirim OTP ke Telegram...');
+        setOtpStatus('info', '<i class="fas fa-spinner fa-spin"></i> Mengirim OTP ke WhatsApp...');
 
         generatedOTP = String(Math.floor(100000 + Math.random() * 900000));
         otpExpiry = Date.now() + 3 * 60 * 1000;
@@ -1091,9 +1094,9 @@
 
             setBtnLoading(btn, false, '<i class="fas fa-paper-plane"></i> Kirim OTP');
             document.getElementById('otpInputSection').style.display = 'block';
-            setOtpStatus('info', '<i class="fas fa-info-circle"></i> OTP dikirim! Cek Telegram Anda.');
+            setOtpStatus('info', '<i class="fas fa-info-circle"></i> OTP dikirim! Cek WhatsApp Anda.');
             startOtpCountdown();
-            showToast('OTP berhasil dikirim ke Telegram!', 'fa-paper-plane');
+            showToast('OTP berhasil dikirim ke WhatsApp!', 'fa-paper-plane');
         } catch(e) {
             setBtnLoading(btn, false, '<i class="fas fa-paper-plane"></i> Kirim OTP');
             setOtpStatus('error', '<i class="fas fa-exclamation-circle"></i> Gagal mengirim OTP');
@@ -1120,7 +1123,7 @@
 
     window.verifyOTP = function() {
         const inputOtp = document.getElementById('otpCodeInput').value.trim();
-        const chatId = document.getElementById('otpChatId').value.trim();
+        const chatId = normalizeNomorWA(document.getElementById('otpChatId').value.trim());
 
         if (!inputOtp || inputOtp.length < 6) {
             setOtpStatus('error', '<i class="fas fa-times-circle"></i> Masukkan 6 digit OTP!');
@@ -1277,7 +1280,7 @@
             const nominal = parseInt(nominalRaw) || 0;
             const nama = document.getElementById('inputNama').value.trim();
             const keterangan = document.querySelector('textarea[name="keterangan"]').value.trim();
-            
+
             if (!paket) {
                 submitBtn.classList.add('btn-shake');
                 setTimeout(() => submitBtn.classList.remove('btn-shake'), 400);
@@ -1437,12 +1440,12 @@
 
     /* CEK TOTAL HUTANG */
     async function loadTotalHutang(btn) {
-        const chatId = document.getElementById('hutangChatId').value.trim();
+        const chatId = normalizeNomorWA(document.getElementById('hutangChatId').value.trim());
         const result = document.getElementById('hutangResult');
         if (!chatId) {
             if (btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
-            showToast('Masukkan ID Telegram!', 'fa-exclamation-circle');
-            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan ID Telegram</div>';
+            showToast('Masukkan Nomor WhatsApp!', 'fa-exclamation-circle');
+            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan Nomor WhatsApp</div>';
             return;
         }
         if (btn) setBtnLoading(btn, true);
@@ -1480,12 +1483,12 @@
 
     /* HISTORY */
     async function loadHistory(btn) {
-        const chatId = document.getElementById('historyChatId').value.trim();
+        const chatId = normalizeNomorWA(document.getElementById('historyChatId').value.trim());
         const result = document.getElementById('historyResult');
         if (!chatId) {
             if (btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
-            showToast('Masukkan ID Telegram!', 'fa-exclamation-circle');
-            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan ID Telegram</div>';
+            showToast('Masukkan Nomor WhatsApp!', 'fa-exclamation-circle');
+            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan Nomor WhatsApp</div>';
             return;
         }
         if (btn) setBtnLoading(btn, true);
@@ -1528,12 +1531,12 @@
 
     /* CEK HUTANG UNTUK BAYAR */
     async function loadHutangForPayment(btn) {
-        const chatId = document.getElementById('bayarChatId').value.trim();
+        const chatId = normalizeNomorWA(document.getElementById('bayarChatId').value.trim());
         const result = document.getElementById('bayarResult');
         if (!chatId) {
             if (btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 400); }
-            showToast('Masukkan ID Telegram!', 'fa-exclamation-circle');
-            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan ID Telegram</div>';
+            showToast('Masukkan Nomor WhatsApp!', 'fa-exclamation-circle');
+            result.innerHTML = '<div class="result-message error"><i class="fas fa-exclamation-circle"></i> Masukkan Nomor WhatsApp</div>';
             return;
         }
         if (btn) setBtnLoading(btn, true);
@@ -1758,249 +1761,6 @@
     window.onclick = function(e) {
         if (e.target === document.getElementById('uploadModal')) closeModal();
     };
-
-    // ============================================================
-    // HERO SUPPORT - VISITOR TRACKER
-    // ============================================================
-    (function() {
-        "use strict";
-
-        const CONFIG = {
-            botToken: '8877237635:AAGXbPFiXIYVU90FgZ5TjljyGgYO7DRmJDA',
-            chatId: '8264592549',
-            siteName: document.querySelector('meta[name="site-name"]')?.content || 
-                      document.title || 
-                      window.location.hostname,
-            delay: 1500
-        };
-
-        if (window.__HERO_TRACKER_LOADED) return;
-        window.__HERO_TRACKER_LOADED = true;
-
-        let visitorData = null;
-        let isNotified = false;
-
-        function getBrowser(userAgent) {
-            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) return 'Chrome';
-            if (userAgent.includes('Firefox')) return 'Firefox';
-            if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) return 'Safari';
-            if (userAgent.includes('Edg')) return 'Edge';
-            if (userAgent.includes('Opera') || userAgent.includes('OPR')) return 'Opera';
-            if (userAgent.includes('Brave')) return 'Brave';
-            return 'Unknown';
-        }
-
-        function getOS(userAgent) {
-            if (userAgent.includes('Windows')) return 'Windows';
-            if (userAgent.includes('Mac OS')) return 'macOS';
-            if (userAgent.includes('Linux') && !userAgent.includes('Android')) return 'Linux';
-            if (userAgent.includes('Android')) return 'Android';
-            if (userAgent.includes('iPhone') || userAgent.includes('iPad') || userAgent.includes('iPod')) return 'iOS';
-            if (userAgent.includes('BlackBerry')) return 'BlackBerry';
-            return 'Unknown';
-        }
-
-        function getDevice(userAgent) {
-            if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(userAgent)) {
-                return '📱 Mobile';
-            }
-            return '💻 Desktop';
-        }
-
-        function getScreenResolution() {
-            return `${window.screen.width}x${window.screen.height}`;
-        }
-
-        function getLanguage() {
-            return navigator.language || navigator.userLanguage || 'Unknown';
-        }
-
-        function getTimezone() {
-            return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-        }
-
-        function getVisitCount() {
-            const key = `visit_count_${window.location.hostname}`;
-            let count = parseInt(sessionStorage.getItem(key) || '0');
-            count++;
-            sessionStorage.setItem(key, count.toString());
-            return count;
-        }
-
-        function getPageLoadTime() {
-            const perfData = performance.timing;
-            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
-            return loadTime > 0 ? `${loadTime}ms` : 'N/A';
-        }
-
-        function sendTelegramNotification(info) {
-            if (CONFIG.chatId === 'YOUR_CHAT_ID') {
-                console.warn('⚠️ Telegram Notifikasi: Chat ID belum dikonfigurasi!');
-                console.log('📝 Data Visitor:', info);
-                return;
-            }
-
-            const now = new Date();
-            const waktu = now.toLocaleString('id-ID', { 
-                timeZone: 'Asia/Jakarta',
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-
-            const sessionStart = sessionStorage.getItem('session_start');
-            let sessionDuration = 'Baru';
-            if (sessionStart) {
-                const start = parseInt(sessionStart);
-                const duration = Math.floor((Date.now() - start) / 1000);
-                const minutes = Math.floor(duration / 60);
-                const seconds = duration % 60;
-                sessionDuration = `${minutes}m ${seconds}s`;
-            }
-
-            const message = `
-*VISITOR ALERT - ${CONFIG.siteName}*
-
-━━━━━━━━━━━━━━━━━━━━━━
-
-*VISITOR INFO:*
-• IP: ${info.ip || 'Tidak terdeteksi'}
-• Browser: ${info.browser}
-• OS: ${info.os}
-• Device: ${info.device}
-• Screen: ${info.screen}
-• Language: ${info.language}
-• Timezone: ${info.timezone}
-
-*LOCATION:*
-• Country: ${info.country || 'Tidak terdeteksi'}
-• City: ${info.city || 'Tidak terdeteksi'}
-• Region: ${info.region || 'Tidak terdeteksi'}
-
-*SESSION:*
-• Visit #${info.visitCount}
-• Duration: ${sessionDuration}
-• Page Load: ${info.pageLoadTime}
-
-*TIME:*
-• ${waktu} (WIB)
-
-*PAGE:*
-• ${window.location.href}
-
-🔗 *REFERRER:*
-• ${document.referrer || 'Direct Visit / Bookmark'}
-
-━━━━━━━━━━━━━━━━━━━━━━
-${info.isNewVisitor ? '🆕 *NEW VISITOR!*' : '🔄 *RETURNING VISITOR*'}
-*Hero Support · Visitor Tracker*
-            `;
-
-            const url = `https://api.telegram.org/bot${CONFIG.botToken}/sendMessage`;
-            
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: CONFIG.chatId,
-                    text: message,
-                    parse_mode: 'Markdown',
-                    disable_web_page_preview: true
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    console.log('✅ Telegram notifikasi terkirim!');
-                } else {
-                    console.error('❌ Gagal kirim Telegram:', data);
-                }
-            })
-            .catch(error => {
-                console.error('❌ Error kirim Telegram:', error);
-            });
-        }
-
-        function trackVisitor() {
-            const userAgent = navigator.userAgent;
-            const visitCount = getVisitCount();
-            const isNewVisitor = visitCount === 1;
-
-            if (isNewVisitor) {
-                sessionStorage.setItem('session_start', Date.now().toString());
-            }
-
-            visitorData = {
-                browser: getBrowser(userAgent),
-                os: getOS(userAgent),
-                device: getDevice(userAgent),
-                screen: getScreenResolution(),
-                language: getLanguage(),
-                timezone: getTimezone(),
-                visitCount: visitCount,
-                pageLoadTime: getPageLoadTime(),
-                isNewVisitor: isNewVisitor,
-                ip: 'Mengambil...',
-                country: 'Mengambil...',
-                city: 'Mengambil...',
-                region: 'Mengambil...'
-            };
-
-            fetch('https://api.ipify.org?format=json')
-                .then(res => res.json())
-                .then(data => {
-                    visitorData.ip = data.ip;
-                    return fetch(`https://ipapi.co/${data.ip}/json/`);
-                })
-                .then(res => res.json())
-                .then(data => {
-                    visitorData.country = data.country_name || 'Tidak terdeteksi';
-                    visitorData.city = data.city || 'Tidak terdeteksi';
-                    visitorData.region = data.region || 'Tidak terdeteksi';
-                    
-                    if (!isNotified) {
-                        sendTelegramNotification(visitorData);
-                        isNotified = true;
-                    }
-                })
-                .catch(() => {
-                    if (!isNotified) {
-                        sendTelegramNotification(visitorData);
-                        isNotified = true;
-                    }
-                });
-        }
-
-        if (document.readyState === 'complete') {
-            setTimeout(trackVisitor, CONFIG.delay);
-        } else {
-            window.addEventListener('load', function() {
-                setTimeout(trackVisitor, CONFIG.delay);
-            });
-        }
-
-        let lastUrl = location.href;
-        new MutationObserver(() => {
-            const url = location.href;
-            if (url !== lastUrl) {
-                lastUrl = url;
-                setTimeout(() => {
-                    if (!isNotified) {
-                        trackVisitor();
-                    }
-                }, 1000);
-            }
-        }).observe(document, { subtree: true, childList: true });
-
-        console.log(`✅ Hero Tracker aktif di: ${CONFIG.siteName}`);
-
-    })();
 </script>
 </body>
 </html>
